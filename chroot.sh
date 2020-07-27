@@ -109,15 +109,21 @@ function install_packages() {
 	# Install yay
 	# Patch makepkg so we can run as it as root.
 	sed -i 's/EUID == 0/EUID == -1/' /usr/bin/makepkg
-	git clone https://aur.archlinux.org/yay.git
-	cd yay
-	yes | makepkg -si --needed --noconfirm --skippgpcheck
+	yaydir="/home/$user_name/yay"
+	pacman -S -y --quiet --noconfirm git
+	su "$user_name" -c "git clone https://aur.archlinux.org/yay.git $yaydir"
+	chown -R "$user_name" "$yaydir"
+	chown -R "$user_name" /package.sh
+	cd "$yaydir"
+	#su "$user_name" -c "echo $root_pw | makepkg -si"
+	sudo -u "$user_name" /package.sh "$user_pw"
 	wait
 	cd
-	rm -rf yay
+	rm -rf "$yaydir"
+	echo "$user_pw" | sudo -Sv; yes | yay -S polybar-git
 
 	# Install packages
-	yay -S -y --quiet --noconfirm --mflags --skipinteg pamac-aur bspwm sxhkd polybar-git grub pulseaudio pulseaudio-alsa pavucontrol networkmanager network-manager-applet xf86-input-libinput mesa xorg xorg-xinit xorg-xbacklight redshift feh htop vim firefox base-devel bash-completion git acpi zathura zathura-djvu zathura-pdf-mupdf wget dmenu netctl dialog dhcpcd
+	yay -S -y --quiet --noconfirm --mflags --skipinteg bspwm sxhkd polybar-git grub pulseaudio pulseaudio-alsa pavucontrol networkmanager network-manager-applet xf86-input-libinput mesa xorg xorg-xinit xorg-xbacklight redshift feh htop vim firefox bash-completion git acpi zathura zathura-djvu zathura-pdf-mupdf wget dmenu netctl dialog dhcpcd
 	# Unpatch makepkg
 	#sed -i 's/EUID == -1/EUID == 0/' /usr/bin/makepkg
 	# Check video drivers

@@ -99,7 +99,7 @@ function install_base() {
 function pre_chroot() {
 	echo "CREATING FSTAB FOR NEW SYSTEM"
 	genfstab -U /mnt >> /mnt/etc/fstab
-	cp post-install-notes chroot.sh /mnt
+	cp post-install-notes package.sh chroot.sh /mnt
 	echo
 	echo
 }
