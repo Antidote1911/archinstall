@@ -109,18 +109,19 @@ function install_packages() {
 	# Install yay
 	# Patch makepkg so we can run as it as root.
 	sed -i 's/EUID == 0/EUID == -1/' /usr/bin/makepkg
-	yaydir="/home/$user_name/yay"
 	pacman -S -y --quiet --noconfirm git
-	su "$user_name" -c "git clone https://aur.archlinux.org/yay.git $yaydir"
-	chown -R "$user_name" "$yaydir"
-	chown -R "$user_name" /package.sh
-	cd "$yaydir"
-	#su "$user_name" -c "echo $root_pw | makepkg -si"
-	sudo -u "$user_name" /package.sh "$user_pw"
-	wait
-	cd
-	rm -rf "$yaydir"
-	echo "$user_pw" | sudo -Sv; yes | yay -S polybar-git
+	su $user_name -c 'cd; git clone https://aur.archlinux.org/yay-bin.git'
+	su $user_name -c 'cd; cd yay-bin; makepkg'
+	pushd /home/$user_name/yay-bin/
+	pacman -U *.pkg.tar.xz --noconfirm --needed --noprogressbar
+	popd
+	rm -rf /home/$user_name/yay-bin
+	# do a yay system update
+	echo "Test yay..."
+  su $user_name -c "yay -Syyu --quiet --noconfirm"
+	#echo "Packages from the AUR can now be installed like this:"
+  #echo "su $user_name -c 'yay -S --needed --noprogressbar --needed --noconfirm PACKAGE'"
+	su $user_name -c 'yay -S --needed --noprogressbar --noconfirm arsenic'
 
 	# Install packages
 	yay -S -y --quiet --noconfirm --mflags --skipinteg bspwm sxhkd polybar-git grub pulseaudio pulseaudio-alsa pavucontrol networkmanager network-manager-applet xf86-input-libinput mesa xorg xorg-xinit xorg-xbacklight redshift feh htop vim firefox bash-completion git acpi zathura zathura-djvu zathura-pdf-mupdf wget dmenu netctl dialog dhcpcd
