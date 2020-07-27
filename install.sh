@@ -54,7 +54,7 @@ function increasecowspace() {
 	echo "| Increase cowspace to 2 GB  |"
 	echo "----------------------------"
 	mount -o remount,size=2G /run/archiso/cowspace
-  loadkeys fr-pc
+	loadkeys fr-pc
   timedatectl set-ntp true
 	echo
 	echo
