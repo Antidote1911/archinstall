@@ -1,0 +1,44 @@
+# Thanks for using DBAARF Arch installation script!
+# 
+# Some post installation notes:
+#
+#
+# 1
+#
+# If you installed to an SSD, edit your /etc/fstab so that the / and /home entries have 'discard' after rw
+# DO NOT do this if you installed to an HDD
+#
+# example:
+#
+## Static information about the filesystems.
+## See fstab(5) for details.
+#
+## <file system> <dir> <type> <options> <dump> <pass>
+## /dev/sda1
+#UUID=fcdb4284-16b4-44af-ab4d-268e9d1914e0	/         	ext4      	rw,discard,relatime 	0 1
+#
+## /dev/sda3
+#UUID=58640576-9e79-409a-bb16-b97829220b54	/home     	ext4      	rw,discard,relatime	    0 2
+#
+## /dev/sda2
+#UUID=50b63f2c-d114-471c-bc8d-5f3e92dd115f  	none    	swap    	defaults    0 0
+#
+#
+#
+# 2
+#
+# You may want to run the following command (or substitute with your correct language)
+# 
+# $ localectl set-locale LANG='en_US.UTF-8'
+#
+# I haven't have a problem with this myself, but this sets the locale with 
+# systemd after the boot to make sure that it is correct.
+#
+#
+#
+#
+#
+#
+#
+#
+#
