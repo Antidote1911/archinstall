@@ -93,7 +93,7 @@ function install_base() {
 	echo -e "| 5. Install Base System | "
 	echo -e "--------------------------"
 	echo
-	pacstrap /mnt base base-devel linux linux-firmware nano
+	pacstrap /mnt base base-devel linux linux-firmware nano git go
 }
 
 function pre_chroot() {
@@ -122,17 +122,3 @@ install_base
 pre_chroot
 arch-chroot /mnt ./chroot.sh
 prompt_reboot
-
-# if [ "$(sudo fdisk -l | grep swap | cut -d'/' -f3 | cut -d' ' -f1)" != ""  ]
-#     then
-#         echo
-#         echo 'Swap partition detected: Adding to fstab...'
-#         echo
-#         SWAPPART=$(sudo fdisk -l | grep swap | cut -d'/' -f3 | cut -d' ' -f1)
-#         mkswap /dev/$SWAPPART
-#         MYUUID=$(sudo blkid | grep $SWAPPART | cut -d'"' -f2)
-#         echo >>/mnt/etc/fstab
-#         echo "# /dev/$SWAPPART" >>/mnt/etc/fstab
-#         echo "UUID=$MYUUID     none        swap        defaults        0 0" >>/mnt/etc/fstab
-#         swapon
-# fi

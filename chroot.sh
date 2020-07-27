@@ -108,7 +108,7 @@ function install_packages() {
 
 	# Install yay
 	yaydir="/home/$user_name/yay"
-	pacman -S -y --quiet --noconfirm git
+	#pacman -S -y --quiet --noconfirm git go
 	su "$user_name" -c "git clone https://aur.archlinux.org/yay.git $yaydir"
 	chown -R "$user_name" "$yaydir"
 	chown -R "$user_name" /package.sh
@@ -121,7 +121,7 @@ function install_packages() {
 	echo "$user_pw" | sudo -Sv; yes | yay -S polybar-git
 
 	# Install packages
-	yay -S -y --quiet --noconfirm bspwm sxhkd grub pulseaudio pulseaudio-alsa pavucontrol networkmanager network-manager-applet xf86-input-libinput mesa xorg xorg-xinit xorg-xbacklight redshift feh htop vim firefox base-devel bash-completion git acpi zathura zathura-djvu zathura-pdf-mupdf wget dmenu netctl dialog dhcpcd
+	yay -S -y --quiet --noconfirm pamac-aur bspwm sxhkd grub pulseaudio pulseaudio-alsa pavucontrol networkmanager network-manager-applet xf86-input-libinput mesa xorg xorg-xinit xorg-xbacklight redshift feh htop vim firefox base-devel bash-completion git acpi zathura zathura-djvu zathura-pdf-mupdf wget dmenu netctl dialog dhcpcd
 
 	# Check video drivers
 	echo "Checking graphics card..."
