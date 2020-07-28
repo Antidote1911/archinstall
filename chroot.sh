@@ -153,7 +153,7 @@ function install_packages() {
 	# or not from AUR, use it like pacman yay -Sy PACKAGE
 
 	# Install some AUR packages
-	su $user_name -c "yay -S $yay_options pamac-aur font-manager kvantum-theme-arc numix-icon-theme-git numix-circle-icon-theme-git numix-gtk-theme "
+	su $user_name -c "yay -S $yay_options oh-my-zsh-git pamac-aur font-manager kvantum-theme-arc numix-icon-theme-git numix-circle-icon-theme-git numix-gtk-theme "
 
 	# Unpatch makepkg if you want
 	#sed -i 's/EUID == -1/EUID == 0/' /usr/bin/makepkg
@@ -210,6 +210,8 @@ function customization() {
 	if [[ $vm_setting == 1 ]]; then
   	cp -r /xfce_config/20-nvidia.conf /etc/X11/xorg.conf.d/20-nvidia.conf
 	fi
+	curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+	cp -r /xfce_config/.zshrc /home/$user_name/.zshrc
 
 }
 
