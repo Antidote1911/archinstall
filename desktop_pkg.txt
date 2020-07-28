@@ -1,5 +1,9 @@
 grub
 os-prober
+git
+go
+python
+networkmanager
 
 xorg
 xorg-xinit

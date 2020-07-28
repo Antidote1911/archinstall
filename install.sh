@@ -89,13 +89,13 @@ function install_base() {
 	echo -e "| 5. Install Base System | "
 	echo -e "--------------------------"
 	echo
-	pacstrap /mnt < base_pkg.txt
+	pacstrap /mnt base base-devel linux linux-firmware amd-ucode nano
 }
 
 function pre_chroot() {
 	echo "CREATING FSTAB FOR NEW SYSTEM"
 	genfstab -U /mnt >> /mnt/etc/fstab
-	cp post-install-notes base_pkg.txt desktop_pkg.txt chroot.sh /mnt
+	cp post-install-notes desktop_pkg.txt chroot.sh /mnt
 	echo
 	echo
 }

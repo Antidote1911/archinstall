@@ -180,7 +180,6 @@ function install_grub() {
 function clean_up() {
 	# Remove install scripts from root
 	# (Exits chroot.sh - back into install.sh - and reboots from that script)
-	rm /base_pkg.txt
 	rm /desktop_pkg.txt
 	rm /chroot.sh
 }
