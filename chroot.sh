@@ -43,7 +43,6 @@ function set_root_pw() {
 		fi
 	done
 	echo "root:${root_pw}" | chpasswd
-	chsh --shell /bin/zsh root
 	echo
 	echo
 }
@@ -71,7 +70,6 @@ function create_user() {
 	read user_name
 	echo
 	useradd -m -G adm,audio,floppy,log,network,rfkill,scanner,storage,optical,power,wheel -s /bin/bash $user_name
-	chsh --shell /bin/zsh $user_name
 	echo $'\n'
 
 	pass_ok=0
@@ -89,7 +87,6 @@ function create_user() {
 			echo
 		fi
 	done
-
 	echo "${user_name}:${user_pw}" | chpasswd
 	echo
 
@@ -173,6 +170,8 @@ function install_packages() {
 	systemctl enable NetworkManager
 	systemctl enable lightdm.service
 	systemctl enable ntpd.service
+	chsh --shell /bin/zsh $user_name
+	chsh --shell /bin/zsh root
 	echo
 	echo
 }
