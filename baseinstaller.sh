@@ -14,9 +14,9 @@ function get_confirmation() {
 	echo -n "Enter y/n to confirm: "
 	while [ $ret -lt 0 ]; do
 		read response
-		if [[ "{$response" = "y" ]] || [[ "{$response}" = "yes" ]]; then
+		if [[ "{$response}" = "y" ]] || [[ "{$response}" = "yes" ]]; then
 			ret=0
-		elif [[ "{$response" = "n" ]] || [[ "{$response}" = "no" ]]; then
+		elif [[ "{$response}" = "n" ]] || [[ "{$response}" = "no" ]]; then
 			ret=1
 		else
 			echo -n "Got stones in your ears? It's y/n only: "
