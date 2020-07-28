@@ -3,7 +3,6 @@
 set -e
 (
 
-
 disk_list=""
 disk_install=""
 swap_size=0
@@ -68,6 +67,7 @@ function preparedisk() {
 		echo
 		exit 1
 	fi
+
 	mkfs.ext4  /dev/sda2 -L root
 	mkfs.ext4  /dev/sda3 -L home
 	mount /dev/sda2 /mnt
