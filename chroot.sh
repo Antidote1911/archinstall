@@ -1,5 +1,7 @@
 #!/bin/bash
 #
+((
+set -e
 
 
 # Globals
@@ -7,11 +9,21 @@ user_name=""
 user_pw=""
 root_pw=""
 host_name=""
+vm_setting=""
 pacman_options="--noconfirm --needed"
 yay_options="--quiet --noconfirm --mflags --skipinteg"
 red=`tput setaf 1`
 green=`tput setaf 2`
 reset=`tput sgr0`
+
+function real_or_vm() {
+	echo "${red}***********************************"
+	echo "Type d'installation"
+	echo "***********************************${reset}"
+	echo
+	echo "Machine virtuelle ?"
+	read -p "0 - oui, 1 - non: " vm_setting
+}
 
 function set_root_pw() {
 	echo "${red}***********************************"
@@ -147,28 +159,15 @@ function install_packages() {
 	# Unpatch makepkg if you want
 	#sed -i 's/EUID == -1/EUID == 0/' /usr/bin/makepkg
 
-	# Check video drivers
-	echo "Checking graphics card..."
-	ati=$(lspci | grep VGA | grep ATI)
-	nvidia=$(lspci | grep VGA | grep NVIDIA)
-	intel=$(lspci | grep VGA | grep Intel)
-	amd=$(lspci | grep VGA | grep AMD)
+	# video drivers
+	if [[ $vm_setting == 0 ]]; then
+  	echo "${green}Installation des paquets pour la machine virtuelle${reset}"
+  	pacman -S virtualbox-guest-utils $pacman_options
+  	systemctl enable vboxservice
 
-	if [ ! -z "$ati" ]; then
-	    echo 'Ati graphics detected'
-	    yay -Sy $yay_options xf86-video-ati
-	fi
-	if [ ! -z "$nvidia" ]; then
-	    echo 'Nvidia graphics detected'
-	    yay -Sy $yay_options xf86-video-nouveau
-	fi
-	if [ ! -z  "$intel" ]; then
-	    echo 'Intel graphics detected'
-	    yay -Sy $yay_options xf86-video-intel
-	fi
-	if [ ! -z  "$amd" ]; then
-	    echo 'AMD graphics detected'
-	    yay -Sy $yay_options xf86-video-amdgpu
+	elif [[ $vm_setting == 1 ]]; then
+  	echo "${green}Installation des paquets pour la machine réelle${reset}"
+  	pacman -S nvidia  nvidia-settings virtualbox virtualbox-host-modules-arch $pacman_options
 	fi
 
 	# Install scripts, dotfiles, themes from github
@@ -203,12 +202,15 @@ function customization() {
 	cp -r /xfce_config/packarch-icon.png /usr/share/pixmaps/packarch-icon.png
 	cp -r /xfce_config/00-keyboard.conf /etc/X11/xorg.conf.d/00-keyboard.conf
 	cp -r /xfce_config/environment /etc/environment
-	cp -r /xfce_config/20-nvidia.conf /etc/X11/xorg.conf.d/20-nvidia.conf
-	cp -r /xfce_config/.config /home/$user_name/.config
-	cp -r /xfce_config/.local /home/$user_name/.local
+	cp -r /xfce_config/.config /home/$user_name/
+	cp -r /xfce_config/.local /home/$user_name/
 	######    Lightdm config    #########
 	cp -r /xfce_config/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
 	cp -r /xfce_config/lightdm.conf /etc/lightdm/lightdm.conf
+
+	if [[ $vm_setting == 1 ]]; then
+  	cp -r /xfce_config/20-nvidia.conf /etc/X11/xorg.conf.d/20-nvidia.conf
+	fi
 
 }
 
@@ -222,6 +224,7 @@ function clean_up() {
 	rm /chroot.sh
 }
 
+real_or_vm
 set_root_pw
 create_user
 set_hostname
@@ -230,3 +233,5 @@ install_packages
 install_grub
 customization
 clean_up
+
+) 2>&1) | tee chroot.sh.log
