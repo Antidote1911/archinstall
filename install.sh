@@ -1,6 +1,8 @@
 #!/bin/bash
 #
-(
+exec 3>&1 4>&2
+trap 'exec 2>&4 1>&3' 0 1 2 3
+exec 1>install.log 2>&1
 set -e
 
 disk_list=""
@@ -108,5 +110,3 @@ install_base
 pre_chroot
 arch-chroot /mnt ./chroot.sh
 prompt_reboot
-
-) 2>&1 | tee install.log

@@ -1,6 +1,8 @@
 #!/bin/bash
 #
-(
+exec 3>&1 4>&2
+trap 'exec 2>&4 1>&3' 0 1 2 3
+exec 1>chroot.log 2>&1
 set -e
 
 # Globals
@@ -232,5 +234,3 @@ install_packages
 install_grub
 customization
 clean_up
-
-) 2>&1 | tee chroot.log
