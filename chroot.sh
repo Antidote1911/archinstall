@@ -9,11 +9,14 @@ root_pw=""
 host_name=""
 pacman_options="--noconfirm --needed"
 yay_options="--quiet --noconfirm --mflags --skipinteg"
+red=`tput setaf 1`
+green=`tput setaf 2`
+reset=`tput sgr0`
 
 function set_root_pw() {
-	echo "-----------------"
-	echo "| Root Password |"
-	echo "-----------------"
+	echo "${red}-----------------------"
+	echo "Root Password"
+	echo "-----------------------${reset}"
 	echo
 	pass_ok=0
 	while [ $pass_ok -eq 0 ]; do
@@ -158,6 +161,7 @@ function install_packages() {
 	fi
 
 	# Install scripts, dotfiles, themes from github
+	systemctl enable NetworkManager
 	systemctl enable lightdm.service
 	systemctl enable ntpd.service
 	echo
@@ -176,6 +180,11 @@ function install_grub() {
 	echo
 }
 
+
+function customization() {
+	echo
+}
+
 function clean_up() {
 	# Remove install scripts from root
 	# (Exits chroot.sh - back into install.sh - and reboots from that script)
@@ -188,4 +197,5 @@ set_timezone
 create_user
 install_packages
 install_grub
+customization
 clean_up

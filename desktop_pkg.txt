@@ -4,6 +4,7 @@ git
 go
 python
 networkmanager
+linux-headers
 
 xorg
 xorg-xinit
