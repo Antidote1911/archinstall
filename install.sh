@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 set -e
-((
+(
 
 
 disk_list=""
@@ -109,4 +109,4 @@ pre_chroot
 arch-chroot /mnt ./chroot.sh
 prompt_reboot
 
-) 2>&1) | tee install.sh.log
+) 2>&1 | tee install.sh.log

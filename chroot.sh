@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 set -e
-((
+(
 
 
 
@@ -235,4 +235,4 @@ install_grub
 customization
 clean_up
 
-) 2>&1) | tee chroot.sh.log
+) 2>&1 | tee chroot.sh.log
