@@ -1,5 +1,7 @@
 #!/bin/bash
 #
+(
+set -e
 
 disk_list=""
 disk_install=""
@@ -106,3 +108,5 @@ install_base
 pre_chroot
 arch-chroot /mnt ./chroot.sh
 prompt_reboot
+
+) 2>&1 | tee install.log

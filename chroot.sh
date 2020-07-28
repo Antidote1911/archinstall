@@ -1,5 +1,7 @@
 #!/bin/bash
 #
+(
+set -e
 
 # Globals
 user_name=""
@@ -230,3 +232,5 @@ install_packages
 install_grub
 customization
 clean_up
+
+) 2>&1 | tee chroot.log
