@@ -1,7 +1,5 @@
 #!/bin/bash
 #
-exec 1> chroot.log 2>&1
-set -x
 
 # Globals
 user_name=""

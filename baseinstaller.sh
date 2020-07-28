@@ -1,7 +1,5 @@
 #!/bin/bash
 #
-exec 1> install.log 2>&1
-set -x
 
 disk_list=""
 disk_install=""

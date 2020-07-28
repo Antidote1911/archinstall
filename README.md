@@ -10,5 +10,5 @@ Boot Arch Install media, connect to the internet, and create the required GPT pa
 ```bash
 pacman -Sy git  
 git clone https://github.com/Antidote1911/archinstall
-cd archinstall && ./install.sh
+cd archinstall && ./archinstall.sh
 ```
