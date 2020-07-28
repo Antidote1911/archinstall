@@ -14,9 +14,9 @@ green=`tput setaf 2`
 reset=`tput sgr0`
 
 function set_root_pw() {
-	echo "${red}-----------------------"
+	echo "${red}***********************************"
 	echo "Root Password"
-	echo "-----------------------${reset}"
+	echo "***********************************${reset}"
 	echo
 	pass_ok=0
 	while [ $pass_ok -eq 0 ]; do
@@ -38,27 +38,24 @@ function set_root_pw() {
 	echo
 }
 
-
-function set_timezone() {
-	echo "-----------------------"
-	echo "| Locale and Timezone |"
-	echo "-----------------------"
+function set_hostname() {
+	echo "${red}***********************************"
+	echo "Hostname Configuration"
+	echo "***********************************${reset}"
 	echo
-
-	# Set locale, symlink to local time
-	echo 'fr_FR.UTF-8 UTF-8' >>/etc/locale.gen
-	locale-gen
-	ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
-	hwclock --systohc --utc
+	echo -n "Enter desired hostname: "
+	read host_name
+	echo $host_name > /etc/hostname
+	echo "127.0.1.1 $host_name.localdomain $host_name" >> /etc/hosts
 	echo
 	echo
 }
 
-# Create user, password, change hostname
+# Create user
 function create_user() {
-	echo "-----------------"
-	echo "| User Creation |"
-	echo "-----------------"
+	echo "${red}***********************************"
+	echo "User Creation"
+	echo "***********************************${reset}"
 	echo
 	echo -n "Enter desired username: "
 	read user_name
@@ -84,29 +81,43 @@ function create_user() {
 
 	echo "${user_name}:${user_pw}" | chpasswd
 	echo
-	echo
 
-	echo
-	echo -n "Enter desired hostname: "
-	read host_name
-	echo $host_name > /etc/hostname
-	echo
-	echo
+	# Uncomment %wheel ALL=(ALL) NOPASSWD: ALL to allow members
+	# of group wheel to execute any command without a password
+	sed -i 's/\# \%wheel ALL=(ALL) NOPASSWD: ALL/\%wheel ALL=(ALL) NOPASSWD: ALL/g' /etc/sudoers
 
-	# Add user to wheel
+	# And unable  password feedback
 	echo "" >> /etc/sudoers
-	echo "## Allow members of group wheel to execute any command" >> /etc/sudoers
-	echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 	echo "## Enable password feedback" >> /etc/sudoers
 	echo "Defaults env_reset,pwfeedback" >> /etc/sudoers
+	echo
+	echo
+}
 
+function set_timezone() {
+	echo "${red}***********************************"
+	echo "Locale and Timezone"
+	echo "***********************************${reset}"
+	echo
+
+	# Set locale, symlink to local time
+	ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
+	sed -i  '/fr_FR.UTF-8/ s/^#//' /etc/locale.gen
+	locale-gen
+	echo LANG="fr_FR.UTF-8" > /etc/locale.conf
+	export LANG=fr_FR.UTF-8
+	echo KEYMAP=fr > /etc/vconsole.conf
+	hwclock --systohc --utc
+	mkinitcpio -p linux
+	echo
+	echo
 }
 
 
 function install_packages() {
-	echo "------------------------"
-	echo "| Package Installation |"
-	echo "------------------------"
+	echo "${red}***********************************"
+	echo "Package Installation"
+	echo "***********************************${reset}"
 	echo
   # Install packages
 	pacman -Syu - < desktop_pkg.txt $pacman_options
@@ -171,9 +182,9 @@ function install_packages() {
 
 # Install grub
 function install_grub() {
-	echo "---------------------"
-	echo "| Grub Installation |"
-	echo "---------------------"
+	echo "${red}***********************************"
+	echo "Grub Installation"
+	echo "***********************************${reset}"
 	echo
 	grub-install --target=i386-pc --no-floppy --recheck /dev/sda
 	grub-mkconfig -o /boot/grub/grub.cfg
@@ -182,7 +193,17 @@ function install_grub() {
 
 
 function customization() {
+	echo "${red}***********************************"
+	echo "Customization"
+	echo "***********************************${reset}"
 	echo
+	echo
+
+
+
+
+
+	
 }
 
 function clean_up() {
@@ -193,8 +214,9 @@ function clean_up() {
 }
 
 set_root_pw
-set_timezone
 create_user
+set_hostname
+set_timezone
 install_packages
 install_grub
 customization
