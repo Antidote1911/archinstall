@@ -198,17 +198,26 @@ function customization() {
 	echo "***********************************${reset}"
 	echo
 	echo
+	git clone https://github.com/Antidote1911/xfce_config.git
+	cp -r /xfce_config/backgrounds/packarch /usr/share/backgrounds/
+	cp -r /xfce_config/packarch-icon.png /usr/share/pixmaps/packarch-icon.png
+	cp -r /xfce_config/00-keyboard.conf /etc/X11/xorg.conf.d/00-keyboard.conf
+	cp -r /xfce_config/environment /etc/environment
+	cp -r /xfce_config/20-nvidia.conf /etc/X11/xorg.conf.d/20-nvidia.conf
+	cp -r /xfce_config/.config /home/$user_name/.config
+	cp -r /xfce_config/.local /home/$user_name/.local
+	######    Lightdm config    #########
+	cp -r /xfce_config/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
+	cp -r /xfce_config/lightdm.conf /etc/lightdm/lightdm.conf
 
-
-
-
-
-	
 }
 
 function clean_up() {
 	# Remove install scripts from root
 	# (Exits chroot.sh - back into install.sh - and reboots from that script)
+	echo "${green}Clean up${reset}"
+	su $user_name -c "yes | yay -Scc"
+	rm -r /xfce_config
 	rm /desktop_pkg.txt
 	rm /chroot.sh
 }
