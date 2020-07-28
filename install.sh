@@ -76,10 +76,8 @@ function preparedisk() {
 		echo
 		exit 1
 	fi
-	echo "Formatage des partitions"
 	mkfs.ext4  /dev/sda2 -L root
 	mkfs.ext4  /dev/sda3 -L home
-	echo "Montage des partitions"
 	mount /dev/sda2 /mnt
 	mkdir /mnt/home && mount /dev/sda3 /mnt/home
 	echo

@@ -1,16 +1,14 @@
-# Personal Arch Linux Quick Install Script  
+# Personal Archlinux Install Script  
 
-## Installation:  
+**Installation:**  
 
-Boot Arch Install media
-Create the required GPT partitions:
-- sda18Mb unformated or modifie the script 
-Connect to the internet  
+Boot Arch Install media, connect to the internet, and create the required GPT partitions:
+- sda1 8Mb unformated with bios-boot flag
+- sda2 for root
+- sda3 for home
 
-    pacman -Sy git  
-    git clone https://github.com/Antidote1911/archinstall
-    cd archinstall && ./install.sh
-
-
-The installer will prompt you for input when needed.  
-That's it. After rebooting, log in to your created user account and you are good to go.
+```bash
+pacman -Sy git  
+git clone https://github.com/Antidote1911/archinstall
+cd archinstall && ./install.sh
+```
