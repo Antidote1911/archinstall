@@ -113,7 +113,6 @@ function install_packages() {
 
 	# Install yay
 	echo "Install Yay"
-	pacman -S -y --quiet --noconfirm git
 	su $user_name -c 'cd; git clone https://aur.archlinux.org/yay-bin.git'
 	su $user_name -c 'cd; cd yay-bin; makepkg'
 	pushd /home/$user_name/yay-bin/
