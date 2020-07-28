@@ -7,7 +7,7 @@ user_name=""
 user_pw=""
 root_pw=""
 host_name=""
-pacman_options="--quiet --noconfirm --needed"
+pacman_options="--noconfirm --needed"
 yay_options="--quiet --noconfirm --mflags --skipinteg"
 
 function set_root_pw() {

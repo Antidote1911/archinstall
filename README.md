@@ -1,8 +1,10 @@
-# Arch Linux Quick Install Script  
+# Personal Arch Linux Quick Install Script  
 
 ## Installation:  
 
-Boot Arch Install media  
+Boot Arch Install media
+Create the required GPT partitions:
+- sda18Mb unformated or modifie the script 
 Connect to the internet  
 
     pacman -Sy git  

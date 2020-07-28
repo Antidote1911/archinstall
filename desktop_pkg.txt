@@ -1,12 +1,10 @@
 grub
 os-prober
 
-# Xorg
 xorg
 xorg-xinit
 xorg-drivers
 
-# System
 bind
 numlockx
 reflector
@@ -28,13 +26,11 @@ nfs-utils
 ntfs-3g
 wget
 
-# Printing
 cups
 hplip
 xsane
 system-config-printer
 
-# desktop
 xfce4
 xfce4-goodies
 ffmpegthumbnailer
@@ -61,18 +57,11 @@ qt5ct
 network-manager-applet
 hunspell-fr
 veracrypt
-#gimp
-#libreoffice-fresh
-#libreoffice-fresh-fr
-#virtualbox
-#virtualbox-host-modules-arch
 
-# Login Manager
 lightdm
 lightdm-gtk-greeter
 lightdm-gtk-greeter-settings
 
-# Compress
 xarchiver
 arj
 unrar
@@ -83,14 +72,12 @@ lzop
 lrzip
 unace
 
-# Develop
 gdb
 qtcreator
 qt5-translations
 atom
 ghex
 
-# Fonts
 noto-fonts
 ttf-inconsolata
 ttf-dejavu

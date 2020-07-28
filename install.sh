@@ -91,7 +91,6 @@ function install_base() {
 	echo -e "| 5. Install Base System | "
 	echo -e "--------------------------"
 	echo
-	# pacstrap /mnt base base-devel linux linux-firmware nano git go python
 	pacstrap /mnt < base_pkg.txt
 }
 
