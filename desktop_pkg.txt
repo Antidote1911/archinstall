@@ -10,6 +10,7 @@ xorg
 xorg-xinit
 xorg-drivers
 
+zsh
 bind
 numlockx
 reflector

@@ -1,3 +1,3 @@
-#!/usr/bin/env bash
+#!/bin/zsh
 
 ./baseinstaller.sh | tee base.log

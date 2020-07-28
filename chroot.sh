@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 #
 
 # Globals
@@ -43,6 +43,7 @@ function set_root_pw() {
 		fi
 	done
 	echo "root:${root_pw}" | chpasswd
+	chsh --shell /bin/zsh root
 	echo
 	echo
 }
@@ -70,6 +71,7 @@ function create_user() {
 	read user_name
 	echo
 	useradd -m -G adm,audio,floppy,log,network,rfkill,scanner,storage,optical,power,wheel -s /bin/bash $user_name
+	chsh --shell /bin/zsh $user_name
 	echo $'\n'
 
 	pass_ok=0
