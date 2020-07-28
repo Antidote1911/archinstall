@@ -1,7 +1,8 @@
 #!/bin/bash
 #
-((
 set -e
+((
+
 
 
 # Globals

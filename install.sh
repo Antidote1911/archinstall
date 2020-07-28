@@ -1,7 +1,8 @@
 #!/bin/bash
 #
-((
 set -e
+((
+
 
 disk_list=""
 disk_install=""
@@ -27,16 +28,6 @@ function get_confirmation() {
 	return $ret
 }
 
-# Check if input is integer
-function check_int() {
-	re='^[0-9]+$'
-	if ! [[ $1 =~ $re ]] ; then
-		return 1
-	else
-		return 0
-	fi
-}
-
 # Display title and info about installer
 function title() {
 	echo "-----------------------------"
@@ -59,7 +50,6 @@ function increasecowspace() {
 	echo
 	echo
 }
-
 
 function preparedisk() {
 	echo -e "------------------"
@@ -110,7 +100,6 @@ function prompt_reboot() {
 	echo "Installation complete!"
 	echo "Remove usb and reboot your system homey."
 }
-
 
 title
 increasecowspace
