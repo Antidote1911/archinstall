@@ -7,9 +7,10 @@ user_name=""
 user_pw=""
 root_pw=""
 host_name=""
+pacman_options="--quiet --noconfirm --needed"
+yay_options="--quiet --noconfirm --mflags --skipinteg"
 
 function set_root_pw() {
-	clear
 	echo "-----------------"
 	echo "| Root Password |"
 	echo "-----------------"
@@ -17,9 +18,9 @@ function set_root_pw() {
 	pass_ok=0
 	while [ $pass_ok -eq 0 ]; do
 		echo
-		echo -n 'Set password for root: '
+		echo -n "Set password for root: "
 		read root_pw
-		echo -n 'Confirm password for root: '
+		echo -n "Confirm password for root: "
 		read root_pw_conf
 		if [ "$root_pw" = "$root_pw_conf" ]; then
 			pass_ok=1
@@ -44,7 +45,6 @@ function set_timezone() {
 	# Set locale, symlink to local time
 	echo 'fr_FR.UTF-8 UTF-8' >>/etc/locale.gen
 	locale-gen
-	clear
 	ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
 	hwclock --systohc --utc
 	echo
@@ -60,7 +60,7 @@ function create_user() {
 	echo -n "Enter desired username: "
 	read user_name
 	echo
-	useradd -m -G wheel -s /bin/bash $user_name
+	useradd -m -G adm,audio,floppy,log,network,rfkill,scanner,storage,optical,power,wheel -s /bin/bash $user_name
 	echo $'\n'
 
 	pass_ok=0
@@ -105,28 +105,34 @@ function install_packages() {
 	echo "| Package Installation |"
 	echo "------------------------"
 	echo
+  # Install packages
+	pacman -Syu - < desktop_pkg.txt $pacman_options
 
-	# Install yay
 	# Patch makepkg so we can run as it as root.
 	sed -i 's/EUID == 0/EUID == -1/' /usr/bin/makepkg
-	pacman -S -y --quiet --noconfirm git
+
+	# Install yay
+	echo "Install Yay"
 	su $user_name -c 'cd; git clone https://aur.archlinux.org/yay-bin.git'
 	su $user_name -c 'cd; cd yay-bin; makepkg'
 	pushd /home/$user_name/yay-bin/
-	pacman -U *.pkg.tar.zst --noconfirm --needed --noprogressbar
+	pacman -U *.pkg.tar.zst $pacman_options
 	popd
 	rm -rf /home/$user_name/yay-bin
-	# do a yay system update
-	echo "Test yay..."
-  su $user_name -c "yay -Syyu --quiet --noconfirm"
-	#echo "Packages from the AUR can now be installed like this:"
-  #echo "su $user_name -c 'yay -S --needed --noprogressbar --needed --noconfirm PACKAGE'"
-	su $user_name -c 'yay -S --needed --noconfirm arsenic'
 
-	# Install packages
-	yay -S -y --quiet --noconfirm --mflags --skipinteg bspwm sxhkd polybar-git grub pulseaudio pulseaudio-alsa pavucontrol networkmanager network-manager-applet xf86-input-libinput mesa xorg xorg-xinit xorg-xbacklight redshift feh htop vim firefox bash-completion git acpi zathura zathura-djvu zathura-pdf-mupdf wget dmenu netctl dialog dhcpcd
-	# Unpatch makepkg
+	# do a yay system update
+  su $user_name -c "yay -Syyu $yay_options"
+
+	# Packages from the AUR can now be installed like this:
+  # su $user_name -c 'yay -S --needed --noprogressbar --needed --noconfirm PACKAGE'
+	# or not from AUR, use it like pacman yay -Sy PACKAGE
+
+	# Install some AUR packages
+	su $user_name -c "yay -S $yay_options pamac-aur font-manager kvantum-theme-arc numix-icon-theme-git numix-circle-icon-theme-git numix-gtk-theme "
+
+	# Unpatch makepkg if you want
 	#sed -i 's/EUID == -1/EUID == 0/' /usr/bin/makepkg
+
 	# Check video drivers
 	echo "Checking graphics card..."
 	ati=$(lspci | grep VGA | grep ATI)
@@ -136,37 +142,24 @@ function install_packages() {
 
 	if [ ! -z "$ati" ]; then
 	    echo 'Ati graphics detected'
-	    yay -S -y --quiet --noconfirm xf86-video-ati
+	    yay -Sy $yay_options xf86-video-ati
 	fi
 	if [ ! -z "$nvidia" ]; then
 	    echo 'Nvidia graphics detected'
-	    yay -S -y --quiet --noconfirm xf86-video-nouveau
+	    yay -Sy $yay_options xf86-video-nouveau
 	fi
 	if [ ! -z  "$intel" ]; then
 	    echo 'Intel graphics detected'
-	    yay -S -y --quiet --noconfirm xf86-video-intel
+	    yay -Sy $yay_options xf86-video-intel
 	fi
 	if [ ! -z  "$amd" ]; then
 	    echo 'AMD graphics detected'
-	    yay -S -y --quiet --noconfirm xf86-video-amdgpu
+	    yay -Sy $yay_options xf86-video-amdgpu
 	fi
 
 	# Install scripts, dotfiles, themes from github
-	git clone https://github.com/cadwalladr/scripts "/home/${user_name}/.scripts"
-	chown -R "/home/${user_name}/.scripts"
-	chgrp -R "/home/${user_name}/.scripts"
-
-	git clone https://github.com/cadwalladr/bspwm-themes "/home/${user_name}/bspwm-themes"
-	chown -R "/home/${user_name}/bspwm-themes"
-	chgrp -R "/home/${user_name}/bspwm-themes"
-	echo "exec bspwm -c ~/.config/bspwm/soren" > "/home/${user_name}/.xinitrc"
-	chmod +x "/home/${user_name}/.xinitrc"
-	chown -R "/home/${user_name}/.xinitrc"
-	chgrp -R "/home/${user_name}/.xinitrc"
-
-	git clone https://github.com/cadwalladr/doot "/home/${user_name}/doot"
-	chown -R "/home/${user_name}/doot"
-	chgrp -R "/home/${user_name}/doot"
+	systemctl enable lightdm.service
+	systemctl enable ntpd.service
 	echo
 	echo
 }
@@ -186,6 +179,8 @@ function install_grub() {
 function clean_up() {
 	# Remove install scripts from root
 	# (Exits chroot.sh - back into install.sh - and reboots from that script)
+	rm /base_pkg.txt
+	rm /desktop_pkg.txt
 	rm /chroot.sh
 }
 

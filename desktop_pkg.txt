@@ -1,0 +1,96 @@
+grub
+os-prober
+
+# Xorg
+xorg
+xorg-xinit
+xorg-drivers
+
+# System
+bind
+numlockx
+reflector
+neofetch
+openssh
+x11-ssh-askpass
+wpa_supplicant
+acpi
+pulseaudio
+pulseaudio-alsa
+ntp
+lsb-release
+xdg-user-dirs
+xdg-utils
+gvfs
+gvfs-nfs
+gparted
+nfs-utils
+ntfs-3g
+wget
+
+# Printing
+cups
+hplip
+xsane
+system-config-printer
+
+# desktop
+xfce4
+xfce4-goodies
+ffmpegthumbnailer
+pcmanfm
+smplayer
+smplayer-skins
+smplayer-themes
+firefox
+firefox-i18n-fr
+qpdfview
+keepassxc
+simplescreenrecorder
+pavucontrol
+hardinfo
+arc-gtk-theme
+leafpad
+polkit-gnome
+xcursor-vanilla-dmz
+gtk-engine-murrine
+gtk-engines
+gcolor2
+kvantum-qt5
+qt5ct
+network-manager-applet
+hunspell-fr
+veracrypt
+#gimp
+#libreoffice-fresh
+#libreoffice-fresh-fr
+#virtualbox
+#virtualbox-host-modules-arch
+
+# Login Manager
+lightdm
+lightdm-gtk-greeter
+lightdm-gtk-greeter-settings
+
+# Compress
+xarchiver
+arj
+unrar
+unzip
+zip
+p7zip
+lzop
+lrzip
+unace
+
+# Develop
+gdb
+qtcreator
+qt5-translations
+atom
+ghex
+
+# Fonts
+noto-fonts
+ttf-inconsolata
+ttf-dejavu

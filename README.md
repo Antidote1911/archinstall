@@ -6,9 +6,9 @@ Boot Arch Install media
 Connect to the internet  
 
     pacman -Sy git  
-    git clone https://github.com/cadwalladr/arch-installer  
-    cd arch-installer  
-    ./install.sh  
-    
+    git clone https://github.com/Antidote1911/archinstall
+    cd archinstall && ./install.sh
+
+
 The installer will prompt you for input when needed.  
 That's it. After rebooting, log in to your created user account and you are good to go.

@@ -37,7 +37,6 @@ function check_int() {
 
 # Display title and info about installer
 function title() {
-	clear
 	echo "-----------------------------"
 	echo "| Arch Linux Quick Installer |"
 	echo "----------------------------"
@@ -49,7 +48,6 @@ function title() {
 }
 
 function increasecowspace() {
-	clear
 	echo "-----------------------------"
 	echo "| Increase cowspace to 2 GB  |"
 	echo "----------------------------"
@@ -93,19 +91,19 @@ function install_base() {
 	echo -e "| 5. Install Base System | "
 	echo -e "--------------------------"
 	echo
-	pacstrap /mnt base base-devel linux linux-firmware nano git go
+	# pacstrap /mnt base base-devel linux linux-firmware nano git go python
+	pacstrap /mnt < base_pkg.txt
 }
 
 function pre_chroot() {
 	echo "CREATING FSTAB FOR NEW SYSTEM"
 	genfstab -U /mnt >> /mnt/etc/fstab
-	cp post-install-notes package.sh chroot.sh /mnt
+	cp post-install-notes base_pkg.txt desktop_pkg.txt chroot.sh /mnt
 	echo
 	echo
 }
 
 function prompt_reboot() {
-	clear
 	echo -e "------------"
 	echo -e "| COMPLETE |"
 	echo -e "------------"
