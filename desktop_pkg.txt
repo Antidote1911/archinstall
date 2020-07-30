@@ -11,6 +11,8 @@ xorg-xinit
 xorg-drivers
 
 zsh
+zsh-syntax-highlighting
+zsh-autosuggestions
 bind
 numlockx
 reflector

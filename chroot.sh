@@ -150,7 +150,7 @@ function install_packages() {
 	# or not from AUR, use it like pacman yay -Sy PACKAGE
 
 	# Install some AUR packages
-	su $user_name -c "yay -S $yay_options oh-my-zsh-git pamac-aur font-manager kvantum-theme-arc numix-icon-theme-git numix-circle-icon-theme-git numix-gtk-theme "
+	su $user_name -c "yay -S $yay_options pamac-aur font-manager kvantum-theme-arc numix-icon-theme-git numix-circle-icon-theme-git numix-gtk-theme"
 
 	# Unpatch makepkg if you want
 	#sed -i 's/EUID == -1/EUID == 0/' /usr/bin/makepkg
@@ -167,6 +167,7 @@ function install_packages() {
 	fi
 
 	# Install scripts, dotfiles, themes from github
+	su $user_name -c "curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh"
 	systemctl enable NetworkManager
 	systemctl enable lightdm.service
 	systemctl enable ntpd.service
