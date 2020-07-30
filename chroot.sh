@@ -127,7 +127,7 @@ function install_packages() {
 	echo "Package Installation"
 	echo "***********************************${reset}"
 	echo
-  # Install packages
+        # Install packages
 	pacman -Syu - < desktop_pkg.txt $pacman_options
 
 	# Patch makepkg so we can run as it as root.
@@ -143,10 +143,10 @@ function install_packages() {
 	rm -rf /home/$user_name/yay-bin
 
 	# do a yay system update
-  su $user_name -c "yay -Syyu $yay_options"
+        su $user_name -c "yay -Syyu $yay_options"
 
 	# Packages from the AUR can now be installed like this:
-  # su $user_name -c 'yay -S --needed --noprogressbar --needed --noconfirm PACKAGE'
+        # su $user_name -c 'yay -S --needed --noprogressbar --needed --noconfirm PACKAGE'
 	# or not from AUR, use it like pacman yay -Sy PACKAGE
 
 	# Install some AUR packages
