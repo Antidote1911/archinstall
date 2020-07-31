@@ -67,9 +67,9 @@ function preparedisk() {
 	fi
 
 	mkfs.ext4  /dev/sda2 -L root
-	mkfs.ext4  /dev/sda3 -L home
+	mkfs.ext4  /dev/sdb1 -L home
 	mount /dev/sda2 /mnt
-	mkdir /mnt/home && mount /dev/sda3 /mnt/home
+	mkdir /mnt/home && mount /dev/sdb1 /mnt/home
 	echo
 	echo
 }
