@@ -198,7 +198,7 @@ function customization() {
 	echo
 	git clone https://github.com/Antidote1911/myconfig.git
 	mdir /home/$user_name
-	cp -r /myconfig/homeuser/* /home/$user_name/	
+	cp -r /myconfig/homeuser/* /home/$user_name/
 	mkdir root
 	cp -r /myconfig/root/* /root/
 	cp -r /myconfig/usr/* /usr/
@@ -214,7 +214,7 @@ function clean_up() {
 	# (Exits chroot.sh - back into install.sh - and reboots from that script)
 	echo "${green}Clean up${reset}"
 	su $user_name -c "yes | yay -Scc"
-	rm -r /myconfig
+	# rm -r /myconfig
 	rm /desktop_pkg.txt
 	rm /chroot.sh
 }
