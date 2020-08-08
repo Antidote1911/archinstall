@@ -197,21 +197,14 @@ function customization() {
 	echo
 	echo
 	git clone https://github.com/Antidote1911/myconfig.git
-	cp -r /xfce_config/backgrounds/packarch /usr/share/backgrounds/
-	cp -r /xfce_config/packarch-icon.png /usr/share/pixmaps/packarch-icon.png
-	cp -r /xfce_config/00-keyboard.conf /etc/X11/xorg.conf.d/00-keyboard.conf
-	cp -r /xfce_config/environment /etc/environment
-	cp -r /xfce_config/.config /home/$user_name/
-	cp -r /xfce_config/.local /home/$user_name/
-	######    Lightdm config    #########
-	cp -r /xfce_config/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
-	cp -r /xfce_config/lightdm.conf /etc/lightdm/lightdm.conf
+	cp -r /myconfig/homeuser/* /home/$user_name/
+	cp -r /myconfig/etc/* /etc/
+	cp -r /myconfig/root/* /root/
+	cp -r /myconfig/usr/* /usr/
 
 	if [[ $vm_setting == 1 ]]; then
-  	cp -r /xfce_config/20-nvidia.conf /etc/X11/xorg.conf.d/20-nvidia.conf
+  	cp -r /myconfig/20-nvidia.conf /etc/X11/xorg.conf.d/20-nvidia.conf
 	fi
-	cp -r /xfce_config/.zshrc /home/$user_name/.zshrc
-
 }
 
 function clean_up() {
@@ -219,7 +212,7 @@ function clean_up() {
 	# (Exits chroot.sh - back into install.sh - and reboots from that script)
 	echo "${green}Clean up${reset}"
 	su $user_name -c "yes | yay -Scc"
-	rm -r /xfce_config
+	rm -r /myconfig
 	rm /desktop_pkg.txt
 	rm /chroot.sh
 }
