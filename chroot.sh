@@ -143,14 +143,14 @@ function install_packages() {
 	rm -rf /home/$user_name/yay-bin
 
 	# do a yay system update
-        su $user_name -c "yay -Syyu $yay_options"
+  su $user_name -c "yay -Syyu $yay_options"
 
 	# Packages from the AUR can now be installed like this:
-        # su $user_name -c 'yay -S --needed --noprogressbar --needed --noconfirm PACKAGE'
+  # su $user_name -c 'yay -S --needed --noprogressbar --needed --noconfirm PACKAGE'
 	# or not from AUR, use it like pacman yay -Sy PACKAGE
 
 	# Install some AUR packages
-	su $user_name -c "yay -S $yay_options pamac-aur font-manager kvantum-theme-arc numix-icon-theme-git numix-circle-icon-theme-git numix-gtk-theme"
+	su $user_name -c "yay -S $yay_options pamac-aur font-manager kvantum-theme-arc colorpicker betterlockscreen ksuperkey networkmanager-dmenu-git obmenu-generator perl-linux-desktopfiles polybar rofi-git compton-tryone-git"
 
 	# Unpatch makepkg if you want
 	#sed -i 's/EUID == -1/EUID == 0/' /usr/bin/makepkg
@@ -163,16 +163,16 @@ function install_packages() {
 
 	elif [[ $vm_setting == 1 ]]; then
   	echo "${green}Installation des paquets pour la machine réelle${reset}"
-  	pacman -S nvidia  nvidia-settings virtualbox virtualbox-host-modules-arch $pacman_options
+  	pacman -S nvidia  virtualbox virtualbox-host-modules-arch $pacman_options
 	fi
 
 	# Install scripts, dotfiles, themes from github
-	su $user_name -c "curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh"
+	su $user_name -c "curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh"
+	su $user_name -c chsh --shell /bin/zsh "$user_name"
+
 	systemctl enable NetworkManager
-	systemctl enable lightdm.service
-	systemctl enable ntpd.service
-	chsh --shell /bin/zsh $user_name
-	chsh --shell /bin/zsh root
+	systemctl enable lightdm
+	systemctl enable ntpd
 	echo
 	echo
 }
@@ -196,7 +196,7 @@ function customization() {
 	echo "***********************************${reset}"
 	echo
 	echo
-	git clone https://github.com/Antidote1911/xfce_config.git
+	git clone https://github.com/Antidote1911/bspwm_config.git
 	cp -r /xfce_config/backgrounds/packarch /usr/share/backgrounds/
 	cp -r /xfce_config/packarch-icon.png /usr/share/pixmaps/packarch-icon.png
 	cp -r /xfce_config/00-keyboard.conf /etc/X11/xorg.conf.d/00-keyboard.conf
@@ -210,7 +210,6 @@ function customization() {
 	if [[ $vm_setting == 1 ]]; then
   	cp -r /xfce_config/20-nvidia.conf /etc/X11/xorg.conf.d/20-nvidia.conf
 	fi
-	curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 	cp -r /xfce_config/.zshrc /home/$user_name/.zshrc
 
 }
