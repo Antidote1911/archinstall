@@ -168,7 +168,7 @@ function install_packages() {
 
 	# Install scripts, dotfiles, themes from github
 	su $user_name -c "curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh"
-	su $user_name -c chsh --shell /bin/zsh "$user_name"
+	chsh --shell /bin/zsh "$user_name"
 
 	systemctl enable NetworkManager
 	systemctl enable lightdm
@@ -197,10 +197,12 @@ function customization() {
 	echo
 	echo
 	git clone https://github.com/Antidote1911/myconfig.git
-	cp -r /myconfig/homeuser/* /home/$user_name/
-	cp -r /myconfig/etc/* /etc/
+	mdir /home/$user_name
+	cp -r /myconfig/homeuser/* /home/$user_name/	
+	mkdir root
 	cp -r /myconfig/root/* /root/
 	cp -r /myconfig/usr/* /usr/
+	cp -r /myconfig/etc/* /etc/
 
 	if [[ $vm_setting == 1 ]]; then
   	cp -r /myconfig/20-nvidia.conf /etc/X11/xorg.conf.d/20-nvidia.conf
