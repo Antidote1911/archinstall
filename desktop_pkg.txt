@@ -81,6 +81,7 @@ pulseaudio-alsa
 pv
 ranger
 reflector
+rsync
 scrot
 termite
 veracrypt

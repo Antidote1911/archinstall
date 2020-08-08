@@ -197,12 +197,10 @@ function customization() {
 	echo
 	echo
 	git clone https://github.com/Antidote1911/myconfig.git
-	mdir /home/$user_name
-	cp -r /myconfig/homeuser/* /home/$user_name/
-	mkdir root
-	cp -r /myconfig/root/* /root/
-	cp -r /myconfig/usr/* /usr/
-	cp -r /myconfig/etc/* /etc/
+	rsync -a myconfig/homeuser/ /home/$user_name/
+	rsync -a myconfig/root/ /root/
+	rsync -a myconfig/usr/ /usr/
+	rsync -a myconfig/etc/ /etc/
 
 	if [[ $vm_setting == 1 ]]; then
   	cp -r /myconfig/20-nvidia.conf /etc/X11/xorg.conf.d/20-nvidia.conf
