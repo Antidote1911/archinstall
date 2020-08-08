@@ -55,7 +55,7 @@ function set_hostname() {
 	echo -n "Enter desired hostname: "
 	read host_name
 	echo $host_name > /etc/hostname
-	echo "127.0.1.1 $host_name.localdomain $host_name" >> /etc/hosts
+	echo "127.0.0.1 $host_name.localdomain $host_name" >> /etc/hosts
 	echo
 	echo
 }
