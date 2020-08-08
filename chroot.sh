@@ -196,7 +196,7 @@ function customization() {
 	echo "***********************************${reset}"
 	echo
 	echo
-	git clone https://github.com/Antidote1911/bspwm_config.git
+	git clone https://github.com/Antidote1911/myconfig.git
 	cp -r /xfce_config/backgrounds/packarch /usr/share/backgrounds/
 	cp -r /xfce_config/packarch-icon.png /usr/share/pixmaps/packarch-icon.png
 	cp -r /xfce_config/00-keyboard.conf /etc/X11/xorg.conf.d/00-keyboard.conf
