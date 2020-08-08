@@ -41,6 +41,7 @@ function increasecowspace() {
 	echo "-----------------------------"
 	echo "| Increase cowspace to 2 GB  |"
 	echo "----------------------------"
+	# or this in grub boot options: cow_spacesize=2G 
 	mount -o remount,size=2G /run/archiso/cowspace
 	loadkeys fr-pc
 	timedatectl set-ntp true
