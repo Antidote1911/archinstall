@@ -39,6 +39,7 @@ firefox
 firefox-i18n-fr
 gcolor2
 geany
+git
 gparted
 gtk-engines
 gtk-engine-murrine
