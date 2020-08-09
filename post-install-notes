@@ -1,15 +1,10 @@
-# Thanks for using DBAARF Arch installation script!
-# 
-# Some post installation notes:
-#
-#
-# 1
-#
-# If you installed to an SSD, edit your /etc/fstab so that the / and /home entries have 'discard' after rw
-# DO NOT do this if you installed to an HDD
-#
-# example:
-#
+Some post installation notes:
+
+If you installed to an SSD, edit your /etc/fstab so that the / and /home entries have 'discard' after rw
+DO NOT do this if you installed to an HDD
+
+example:
+
 ## Static information about the filesystems.
 ## See fstab(5) for details.
 #
@@ -23,22 +18,24 @@
 ## /dev/sda2
 #UUID=50b63f2c-d114-471c-bc8d-5f3e92dd115f  	none    	swap    	defaults    0 0
 #
-#
-#
-# 2
-#
-# You may want to run the following command (or substitute with your correct language)
-# 
-# $ localectl set-locale LANG='en_US.UTF-8'
-#
-# I haven't have a problem with this myself, but this sets the locale with 
-# systemd after the boot to make sure that it is correct.
-#
-#
-#
-#
-#
-#
-#
-#
-#
+///////////////////////////////////////////////
+
+You may want to run the following command (or substitute with your correct language)
+localectl set-locale LANG='en_US.UTF-8'
+
+///////////////////////////////////////////////
+
+Update betterlockscreen:
+command 1 update the pictures in cache and command 2 say to betterlockscreen to use the blured picture
+betterlockscreen -u "/usr/share/backgrounds/bg_1.jpg" -b 1  (1 is blur quantity)
+betterlockscreen -l blur
+
+///////////////////////////////////////////////
+
+nfs mount (need install nfs-utils) and create the destinations in /mnt :
+sudo mkdir /mnt/{Partage,Musiques,Photos}
+
+add to fstab:
+192.168.1.96:/volume1/Partage /mnt/Partage  nfs defaults,noatime 0 1
+192.168.1.96:/volume1/music /mnt/Musiques  nfs defaults,noatime 0 1
+192.168.1.96:/volume1/photo /mnt/Photos  nfs defaults,noatime 0 1
