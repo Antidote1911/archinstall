@@ -166,9 +166,10 @@ function install_packages() {
   	pacman -S nvidia  virtualbox virtualbox-host-modules-arch $pacman_options
 	fi
 
-	# Install scripts, dotfiles, themes from github
+	# Install oh-my-zsh
 	su $user_name -c "curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh"
 	chsh --shell /bin/zsh "$user_name"
+  chsh --shell /bin/zsh root
 
 	systemctl enable NetworkManager
 	systemctl enable lightdm
