@@ -5,7 +5,7 @@
 Boot Arch Install media, connect to the internet, and create the required GPT partitions:
 - sda1 8Mb unformated with bios-boot flag
 - sda2 for root
-- sda3 for home
+- sdb3 for home
 
 ```bash
 pacman -Sy git  
