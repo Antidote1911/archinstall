@@ -19,7 +19,7 @@ function real_or_vm() {
 	echo "***********************************${reset}"
 	echo
 	echo "Machine virtuelle ?"
-	read -p "0 - oui, 1 - non: " vm_setting < /dev/tty
+	read -p "0 - oui, 1 - non: " vm_setting
 }
 
 function set_root_pw() {
@@ -31,9 +31,9 @@ function set_root_pw() {
 	while [ $pass_ok -eq 0 ]; do
 		echo
 		echo -n "Set password for root: "
-		read root_pw < /dev/tty
+		read root_pw
 		echo -n "Confirm password for root: "
-		read root_pw_conf < /dev/tty
+		read root_pw_conf
 		if [ "$root_pw" = "$root_pw_conf" ]; then
 			pass_ok=1
 		else
@@ -53,7 +53,7 @@ function set_hostname() {
 	echo "***********************************${reset}"
 	echo
 	echo -n "Enter desired hostname: "
-	read host_name < /dev/tty
+	read host_name
 	echo $host_name > /etc/hostname
 	echo "127.0.0.1 $host_name.localdomain $host_name" >> /etc/hosts
 	echo
@@ -67,7 +67,7 @@ function create_user() {
 	echo "***********************************${reset}"
 	echo
 	echo -n "Enter desired username: "
-	read user_name < /dev/tty
+	read user_name
 	echo
 	useradd -m -G adm,audio,floppy,log,network,rfkill,scanner,storage,optical,power,wheel -s /bin/bash $user_name
 	echo $'\n'
@@ -76,9 +76,9 @@ function create_user() {
 	while [ $pass_ok -eq 0 ]; do
 		echo
 		echo -n "Set password for $user_name: "
-		read user_pw < /dev/tty
+		read user_pw
 		echo -n "Confirm password for $user_name: "
-		read user_pw_conf < /dev/tty
+		read user_pw_conf
 		if [ "$user_pw" = "$user_pw_conf" ]; then
 			pass_ok=1
 		else
