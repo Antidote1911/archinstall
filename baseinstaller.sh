@@ -13,7 +13,7 @@ function get_confirmation() {
 	echo $1
 	echo -n "Enter y/n to confirm: "
 	while [ $ret -lt 0 ]; do
-		read response
+		read response < /dev/tty
 		if [ "$response" == "y" ] || [ "$response" == "yes" ]; then
 			ret=0
 		elif [ "$response" == "n" ] || [ "$response" == "no" ]; then
