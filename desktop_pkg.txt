@@ -46,6 +46,7 @@ pcmanfm
 polkit-gnome
 pulseaudio
 pulseaudio-alsa
+qtcreator
 reflector
 rsync
 veracrypt

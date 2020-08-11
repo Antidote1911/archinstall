@@ -131,7 +131,7 @@ function install_packages() {
 	pacman -Syu - < desktop_pkg.txt $pacman_options
 
 	# Patch makepkg so we can run as it as root.
-	sed -i 's/EUID == 0/EUID == -1/' /usr/bin/makepkg
+	# sed -i 's/EUID == 0/EUID == -1/' /usr/bin/makepkg
 
 	# Install yay
 	echo "Install Yay"
