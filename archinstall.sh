@@ -41,7 +41,7 @@ function increasecowspace() {
 	echo "-----------------------------"
 	echo "| Increase cowspace to 2 GB  |"
 	echo "----------------------------"
-	# or this in grub boot options: cow_spacesize=2G 
+	# or this in grub boot options: cow_spacesize=2G
 	mount -o remount,size=2G /run/archiso/cowspace
 	loadkeys fr-pc
 	timedatectl set-ntp true
@@ -67,20 +67,20 @@ function preparedisk() {
 		exit 1
 	fi
 
-	# mkfs.ext4 /dev/sda2 -L root
-	# mkfs.ext4 /dev/sdb1 -L home
-	# mount /dev/sda2 /mnt
-	# mkdir /mnt/home && mount /dev/sdb1 /mnt/home
-	# echo
-	# echo
+	mkfs.ext4 /dev/sda2 -L root
+	mkfs.ext4 /dev/sdb1 -L home
+	mount /dev/sda2 /mnt
+	mkdir /mnt/home && mount /dev/sdb1 /mnt/home
+	echo
+	echo
 
   # for vbox tests...
-	mkfs.ext4 /dev/sda1 -L root
-	mkfs.ext4 /dev/sda2 -L home
-	mount /dev/sda1 /mnt
-	mkdir /mnt/home && mount /dev/sda2 /mnt/home
-	echo
-	echo
+	# mkfs.ext4 /dev/sda1 -L root
+	# mkfs.ext4 /dev/sda2 -L home
+	# mount /dev/sda1 /mnt
+	# mkdir /mnt/home && mount /dev/sda2 /mnt/home
+	# echo
+	# echo
 }
 
 function install_base() {
