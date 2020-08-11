@@ -150,7 +150,7 @@ function install_packages() {
 	# or not from AUR, use it like pacman yay -Sy PACKAGE
 
 	# Install some AUR packages
-	su $user_name -c "yay -S $yay_options pamac-aur font-manager kvantum-theme-arc colorpicker betterlockscreen ksuperkey networkmanager-dmenu-git obmenu-generator perl-linux-desktopfiles polybar rofi-git compton-tryone-git"
+	su $user_name -c "yay -S $yay_options pamac-aur"
 
 	# Unpatch makepkg if you want
 	#sed -i 's/EUID == -1/EUID == 0/' /usr/bin/makepkg
