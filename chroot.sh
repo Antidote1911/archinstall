@@ -7,7 +7,6 @@ user_pw=""
 root_pw=""
 host_name=""
 vm_setting=""
-oh_my_zsh=""
 pacman_options="--noconfirm --needed"
 yay_options="--quiet --noconfirm --mflags --skipinteg"
 red=`tput setaf 1`
@@ -44,6 +43,7 @@ function set_root_pw() {
 		fi
 	done
 	echo "root:${root_pw}" | chpasswd
+	echo
 	echo
 }
 
@@ -121,14 +121,6 @@ function set_timezone() {
 	echo
 }
 
-function oh_my_zsh() {
-	echo "${red}***********************************"
-	echo "Install Oh-my-zsh ?"
-	echo "***********************************${reset}"
-	echo
-	read -p "0 - oui, 1 - non: " oh_my_zsh
-}
-
 
 function install_packages() {
 	echo "${red}***********************************"
@@ -154,7 +146,7 @@ function install_packages() {
   su $user_name -c "yay -Syyu $yay_options"
 
 	# Packages from the AUR can now be installed like this:
-	su $user_name -c "yay -S $yay_options pamac-aur xcursor-breeze numix-icon-theme-git numix-circle-icon-theme-git numix-folders-git"
+	su $user_name -c "yay -S $yay_options pamac-aur font-manager kvantum-theme-arc colorpicker betterlockscreen ksuperkey networkmanager-dmenu-git obmenu-generator perl-linux-desktopfiles polybar rofi-git compton-tryone-git"
 
 	# Unpatch makepkg if you want
 	#sed -i 's/EUID == -1/EUID == 0/' /usr/bin/makepkg
@@ -170,29 +162,14 @@ function install_packages() {
   	pacman -S nvidia  virtualbox virtualbox-host-modules-arch $pacman_options
 	fi
 
+	# Install oh-my-zsh
+	su $user_name -c "curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh"
 	chsh --shell /bin/zsh "$user_name"
   chsh --shell /bin/zsh root
-
-	if [[ $oh_my_zsh == 0 ]]; then
-		echo "Setting Up Oh-My-Zsh"
-		su $user_name -c 'cd; git clone https://github.com/robbyrussell/oh-my-zsh.git --depth 1 .oh-my-zsh'
-		# https://stackoverflow.com/questions/43402753/oh-my-zsh-not-applying-themes
-		su $user_name -c 'yay -Rncs --noconfirm grml-zsh-config'
-		su $user_name -c "cp /home/$user_name/.oh-my-zsh/templates/zshrc.zsh-template /home/$user_name/.zshrc"
-		# sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="archcraft"/g' /home/live/.zshrc
-	fi
 
 	systemctl enable NetworkManager
 	systemctl enable lightdm
 	systemctl enable ntpd
-	systemctl enable acpid.service
-
-	# disable systemd-networkd.service
-# we have NetworkManager for managing network interfaces
-echo "Disable systemd-networkd.service. We have NetworkManager."
-[[ -e /etc/systemd/system/multi-user.target.wants/systemd-networkd.service ]] && rm /etc/systemd/system/multi-user.target.wants/systemd-networkd.service
-[[ -e /etc/systemd/system/network-online.target.wants/systemd-networkd-wait-online.service ]] && rm /etc/systemd/system/network-online.target.wants/systemd-networkd-wait-online.service
-[[ -e /etc/systemd/system/sockets.target.wants/systemd-networkd.socket ]] && rm /etc/systemd/system/sockets.target.wants/systemd-networkd.socket
 	echo
 	echo
 }
@@ -218,9 +195,10 @@ function customization() {
 	echo
 	git clone https://github.com/Antidote1911/myconfig.git
 
-  cp -afr --no-preserve=ownership myconfig/homeuser/ /home/$user_name
-  cp -afr --no-preserve=ownership myconfig/usr/ /usr
-	cp -afr --no-preserve=ownership myconfig/etc/ /etc
+	rsync -av myconfig/homeuser/ /home/$user_name/ --inplace
+	rsync -av myconfig/root/ /root --inplace
+	rsync -av myconfig/usr/ /usr --inplace
+	rsync -av myconfig/etc/ /etc --inplace
 
 	if [[ $vm_setting == 1 ]]; then
   	cp -r /myconfig/20-nvidia.conf /etc/X11/xorg.conf.d/20-nvidia.conf
@@ -243,7 +221,6 @@ set_root_pw
 create_user
 set_hostname
 set_timezone
-oh_my_zsh
 install_packages
 install_grub
 customization
