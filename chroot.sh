@@ -200,7 +200,6 @@ function customization() {
 	git clone https://github.com/Antidote1911/myconfig.git
 
 	rsync -av myconfig/homeuser/ /home/$user_name/ --inplace
-	rsync -av myconfig/root/ /root --inplace
 	rsync -av myconfig/usr/ /usr --inplace
 	rsync -av myconfig/etc/ /etc --inplace
 
