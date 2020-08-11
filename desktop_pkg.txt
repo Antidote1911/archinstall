@@ -32,6 +32,7 @@ keepassxc
 leafpad
 lightdm
 lightdm-gtk-greeter
+lightdm-gtk-greeter-settings
 lsb-release
 neofetch
 nfs-utils
