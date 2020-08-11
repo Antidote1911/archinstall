@@ -150,7 +150,7 @@ function install_packages() {
 	# or not from AUR, use it like pacman yay -Sy PACKAGE
 
 	# Install some AUR packages
-	su $user_name -c "yay -S $yay_options pamac-aur numix-icon-theme-git numix-circle-icon-theme-git numix-folders-git"
+	su $user_name -c "yay -S $yay_options pamac-aur xcursor-breeze numix-icon-theme-git numix-circle-icon-theme-git numix-folders-git"
 
 	# Unpatch makepkg if you want
 	#sed -i 's/EUID == -1/EUID == 0/' /usr/bin/makepkg
