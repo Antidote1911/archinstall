@@ -166,11 +166,18 @@ function install_packages() {
   	pacman -S nvidia  virtualbox virtualbox-host-modules-arch $pacman_options
 	fi
 
-	# Install oh-my-zsh
+	# Setting Up Oh-My-Zsh
 	chsh --shell /bin/zsh "$user_name"
   chsh --shell /bin/zsh root
+
+	echo "Setting Up Oh-My-Zsh"
 	su $user_name -c 'cd; git clone https://github.com/robbyrussell/oh-my-zsh.git --depth 1 .oh-my-zsh'
-	su $user_name -c "cd; cd .oh-my-zsh; cp /.oh-my-zsh/templates/zshrc.zsh-template /home/$user_name/.zshrc"	
+
+	# https://stackoverflow.com/questions/43402753/oh-my-zsh-not-applying-themes
+	su $user_name -c 'yay -Rncs --noconfirm grml-zsh-config'
+
+	su $user_name -c "cp /home/$user_name/.oh-my-zsh/templates/zshrc.zsh-template /home/$user_name/.zshrc"
+	# sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="archcraft"/g' /home/live/.zshrc
 
 	systemctl enable NetworkManager
 	systemctl enable lightdm
