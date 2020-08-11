@@ -167,9 +167,10 @@ function install_packages() {
 	fi
 
 	# Install oh-my-zsh
-	su $user_name -c "curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh"
 	chsh --shell /bin/zsh "$user_name"
   chsh --shell /bin/zsh root
+	su $user_name -c 'cd; git clone https://github.com/robbyrussell/oh-my-zsh.git --depth 1 .oh-my-zsh'
+	su $user_name -c "cd; cd .oh-my-zsh; cp /.oh-my-zsh/templates/zshrc.zsh-template /home/$user_name/.zshrc"	
 
 	systemctl enable NetworkManager
 	systemctl enable lightdm

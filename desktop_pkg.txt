@@ -8,7 +8,7 @@ linux-headers
 xorg
 xorg-xinit
 xorg-drivers
-networkmanager
+network-manager-applet
 arc-gtk-theme
 arc-icon-theme
 acpi
