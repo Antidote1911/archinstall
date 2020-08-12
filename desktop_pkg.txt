@@ -120,3 +120,4 @@ noto-fonts
 ttf-inconsolata
 ttf-dejavu
 terminus-font-otb
+xsettingsd
