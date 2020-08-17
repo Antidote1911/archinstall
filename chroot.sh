@@ -155,7 +155,7 @@ function install_packages() {
   su $user_name -c "yay -Syyu $yay_options"
 
 	# Packages from the AUR can now be installed like this:
-	su $user_name -c "yay -S $yay_options pamac-aur imagewriter font-manager kvantum-theme-arc colorpicker betterlockscreen networkmanager-dmenu-git perl-linux-desktopfiles polybar rofi-git polybar-spotify-module cava"
+	su $user_name -c "yay -S $yay_options pamac-aur imagewriter font-manager kvantum-theme-arc colorpicker betterlockscreen networkmanager-dmenu-git perl-linux-desktopfiles polybar rofi-git spotify polybar-spotify-module cava"
 
 	# Unpatch makepkg if you want
 	#sed -i 's/EUID == -1/EUID == 0/' /usr/bin/makepkg
@@ -172,12 +172,12 @@ function install_packages() {
 	fi
 
 	chsh --shell /bin/zsh $user_name
-  chsh --shell /bin/zsh root
+    chsh --shell /bin/zsh root
 
 	if [[ $oh_my_zsh == 0 ]]; then
 		echo "Setting Up Oh-My-Zsh"
 		su $user_name -c 'cd; git clone https://github.com/robbyrussell/oh-my-zsh.git --depth 1 .oh-my-zsh'
-		cp -r /myconfig/archcraft.zsh-theme /home/$user_name/.oh-my-zsh/custom/themes/archcraft.zsh-theme
+		su $user_name -c "cp -r /myconfig/archcraft.zsh-theme /home/$user_name/.oh-my-zsh/custom/themes/archcraft.zsh-theme"
 		# https://stackoverflow.com/questions/43402753/oh-my-zsh-not-applying-themes
 		# su $user_name -c 'yay -Rncs --noconfirm grml-zsh-config'
 		su $user_name -c "cp /home/$user_name/.oh-my-zsh/templates/zshrc.zsh-template /home/$user_name/.zshrc"
@@ -187,7 +187,7 @@ function install_packages() {
 	systemctl enable NetworkManager
 	systemctl enable lightdm
 	systemctl enable ntpd
-        systemctl --user enable spotify-listener
+    systemctl --user enable spotify-listener
 
 	echo "Disable systemd-networkd.service. We have NetworkManager."
 	[[ -e /etc/systemd/system/multi-user.target.wants/systemd-networkd.service ]] && rm /etc/systemd/system/multi-user.target.wants/systemd-networkd.service
