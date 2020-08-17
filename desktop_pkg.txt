@@ -46,12 +46,8 @@ linux-headers
 lrzip
 lsb-release
 lxappearance
-lxdm-gtk3
 lzop
-mpc
-mpd
 ncdu
-ncmpcpp
 neofetch
 networkmanager
 nfs-utils
@@ -61,8 +57,6 @@ noto-fonts
 ntfs-3g
 ntp
 numlockx
-obconf
-openbox
 openssh
 os-prober
 p7zip
@@ -99,6 +93,8 @@ x11-ssh-askpass
 xarchiver
 xclip
 xdg-user-dirs
+xdg-utils
+xdotool
 xfce4-power-manager
 xfce4-settings
 xmlstarlet
@@ -112,3 +108,5 @@ zip
 zsh
 zsh-autosuggestions
 zsh-syntax-highlighting
+ueberzug
+cmus
