@@ -110,3 +110,4 @@ zsh-autosuggestions
 zsh-syntax-highlighting
 ueberzug
 cmus
+picom
