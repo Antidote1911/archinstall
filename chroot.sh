@@ -221,11 +221,11 @@ function customization() {
 	
 	if [[ $oh_my_zsh == 0 ]]; then
 		echo "Setting Up Oh-My-Zsh"
-		git clone "https://github.com/robbyrussell/oh-my-zsh.git --depth 1 /home/$user_name/.oh-my-zsh"
-		cp "/myconfig/archcraft.zsh-theme /home/$user_name/.oh-my-zsh/custom/themes/archcraft.zsh-theme"
+		git clone https://github.com/robbyrussell/oh-my-zsh.git --depth 1 /home/$user_name/.oh-my-zsh
+		cp /myconfig/archcraft.zsh-theme /home/$user_name/.oh-my-zsh/custom/themes/archcraft.zsh-theme
 		# https://stackoverflow.com/questions/43402753/oh-my-zsh-not-applying-themes
 		# su $user_name -c 'yay -Rncs --noconfirm grml-zsh-config'
-		cp "/home/$user_name/.oh-my-zsh/templates/zshrc.zsh-template /home/$user_name/.zshrc"
+		cp /home/$user_name/.oh-my-zsh/templates/zshrc.zsh-template /home/$user_name/.zshrc
 		sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="archcraft"/g' /home/$user_name/.zshrc
 	fi
 }
