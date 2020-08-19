@@ -157,10 +157,11 @@ function install_packages() {
   su $user_name -c "yay -Syyu $yay_options"
 
 	# Packages from the AUR can now be installed like this:
-	su $user_name -c "yay -S $yay_options pamac-aur imagewriter font-manager kvantum-theme-arc colorpicker betterlockscreen networkmanager-dmenu-git perl-linux-desktopfiles polybar rofi-git spotify polybar-spotify-module cava"
-
+	su $user_name -c "yay -S $yay_options pamac-aur imagewriter font-manager kvantum-theme-arc colorpicker betterlockscreen networkmanager-dmenu-git perl-linux-desktopfiles polybar rofi-git cava"
+    # su $user_name -c "yay -S $yay_options spotify polybar-spotify-module cava"
+    
 	# Unpatch makepkg if you want
-	#sed -i 's/EUID == -1/EUID == 0/' /usr/bin/makepkg
+	# sed -i 's/EUID == -1/EUID == 0/' /usr/bin/makepkg
 
 	# video drivers
 	if [[ $vm_setting == 0 ]]; then
@@ -189,7 +190,7 @@ function install_packages() {
 	systemctl enable NetworkManager
 	systemctl enable lightdm
 	systemctl enable ntpd
-    systemctl --user enable spotify-listener
+    # systemctl --user enable spotify-listener
 
 	echo "Disable systemd-networkd.service. We have NetworkManager."
 	[[ -e /etc/systemd/system/multi-user.target.wants/systemd-networkd.service ]] && rm /etc/systemd/system/multi-user.target.wants/systemd-networkd.service
