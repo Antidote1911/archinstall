@@ -1,6 +1,8 @@
 #!/bin/bash
 #
 
+set -e
+
 disk_list=""
 disk_install=""
 swap_size=0
