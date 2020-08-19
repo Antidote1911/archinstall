@@ -175,17 +175,7 @@ function install_packages() {
 	fi
 
 	chsh --shell /bin/zsh $user_name
-    chsh --shell /bin/zsh root
-
-	if [[ $oh_my_zsh == 0 ]]; then
-		echo "Setting Up Oh-My-Zsh"
-		su $user_name -c 'cd; git clone https://github.com/robbyrussell/oh-my-zsh.git --depth 1 .oh-my-zsh'
-		su $user_name -c "cp -r /myconfig/archcraft.zsh-theme /home/$user_name/.oh-my-zsh/custom/themes/archcraft.zsh-theme"
-		# https://stackoverflow.com/questions/43402753/oh-my-zsh-not-applying-themes
-		# su $user_name -c 'yay -Rncs --noconfirm grml-zsh-config'
-		su $user_name -c "cp /home/$user_name/.oh-my-zsh/templates/zshrc.zsh-template /home/$user_name/.zshrc"
-		sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="archcraft"/g' /home/live/.zshrc
-	fi
+    chsh --shell /bin/zsh root	
 
 	systemctl enable NetworkManager
 	systemctl enable lightdm
@@ -227,6 +217,16 @@ function customization() {
 
 	if [[ $vm_setting == 1 ]]; then
   	cp -r /myconfig/20-nvidia.conf /etc/X11/xorg.conf.d/20-nvidia.conf
+	fi
+	
+	if [[ $oh_my_zsh == 0 ]]; then
+		echo "Setting Up Oh-My-Zsh"
+		su $user_name -c 'cd; git clone https://github.com/robbyrussell/oh-my-zsh.git --depth 1 .oh-my-zsh'
+		su $user_name -c "cp /myconfig/archcraft.zsh-theme /home/$user_name/.oh-my-zsh/custom/themes/archcraft.zsh-theme"
+		# https://stackoverflow.com/questions/43402753/oh-my-zsh-not-applying-themes
+		# su $user_name -c 'yay -Rncs --noconfirm grml-zsh-config'
+		su $user_name -c "cp /home/$user_name/.oh-my-zsh/templates/zshrc.zsh-template /home/$user_name/.zshrc"
+		sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="archcraft"/g' /home/live/.zshrc
 	fi
 }
 
