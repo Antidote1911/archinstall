@@ -227,6 +227,9 @@ function customization() {
 		# su $user_name -c 'yay -Rncs --noconfirm grml-zsh-config'
 		cp /home/$user_name/.oh-my-zsh/templates/zshrc.zsh-template /home/$user_name/.zshrc
 		sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="archcraft"/g' /home/$user_name/.zshrc
+		# for root
+		cp -r /home/$user_name/.oh-my-zsh /root/.oh-my-zsh
+		cp /home/$user_name/.oh-my-zsh/templates/zshrc.zsh-template /root/.zshrc		
 	fi
 }
 
