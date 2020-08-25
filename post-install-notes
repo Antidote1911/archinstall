@@ -39,3 +39,17 @@ add to fstab:
 192.168.1.96:/volume1/Partage /mnt/Partage  nfs defaults,noatime 0 1
 192.168.1.96:/volume1/music /mnt/Musiques  nfs defaults,noatime 0 1
 192.168.1.96:/volume1/photo /mnt/Photos  nfs defaults,noatime 0 1
+
+To get window class:
+xprop WM_CLASS
+
+update user dirs:
+xdg-user-dirs-update
+
+github:
+git commit -a -m "test"
+git push
+
+pywal:
+wal --backend colorz -i "packarch.jpg"
+

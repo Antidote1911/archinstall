@@ -11,7 +11,7 @@ host_name=""
 vm_setting=""
 oh_my_zsh=""
 pacman_options="--noconfirm --needed"
-yay_options="--quiet --noconfirm --mflags --skipinteg"
+yay_options="--quiet --noconfirm --nopgpfetch --mflags --skipinteg --skippgpcheck"
 red=`tput setaf 1`
 green=`tput setaf 2`
 reset=`tput sgr0`
@@ -157,7 +157,7 @@ function install_packages() {
   su $user_name -c "yay -Syyu $yay_options"
 
 	# Packages from the AUR can now be installed like this:
-	su $user_name -c "yay -S $yay_options pamac-aur imagewriter font-manager kvantum-theme-arc colorpicker betterlockscreen networkmanager-dmenu-git perl-linux-desktopfiles polybar rofi-git cava"
+	su $user_name -c "yay -S $yay_options spotify polybar-spotify-module cava pamac-aur font-manager kvantum-theme-arc colorpicker betterlockscreen networkmanager-dmenu-git perl-linux-desktopfiles polybar rofi-git"
     # su $user_name -c "yay -S $yay_options spotify polybar-spotify-module cava"
     
 	# Unpatch makepkg if you want
@@ -189,7 +189,6 @@ function install_packages() {
 	echo
 }
 
-
 # Install grub
 function install_grub() {
 	echo "${red}***********************************"
@@ -200,7 +199,6 @@ function install_grub() {
 	grub-mkconfig -o /boot/grub/grub.cfg
 	echo
 }
-
 
 function customization() {
 	echo "${red}***********************************"

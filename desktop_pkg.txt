@@ -12,13 +12,13 @@ binutils
 bmon
 bspwm
 calc
+cmatrix
 cups
 dunst
 feh
 ffmpeg
 ffmpegthumbnailer
-firefox
-firefox-i18n-fr
+chromium
 gcolor2
 geany
 git
@@ -62,7 +62,6 @@ os-prober
 p7zip
 pavucontrol
 pcmanfm
-plank
 polkit-gnome
 pulseaudio
 pulseaudio-alsa
@@ -111,3 +110,4 @@ zsh-syntax-highlighting
 ueberzug
 cmus
 picom
+wmctrl
