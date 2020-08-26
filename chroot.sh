@@ -211,7 +211,7 @@ function clean_up() {
 	echo "${green}Clean up${reset}"
 	chown -R $user_name:$user_name /home/$user_name
 	su $user_name -c "yes | yay -Scc"
-	rm -r /myconfig
+	# rm -r /myconfig
 	rm /desktop_pkg.txt
 	rm /chroot.sh
 }
