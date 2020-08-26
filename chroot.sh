@@ -144,7 +144,7 @@ function install_packages() {
   su $user_name -c "yay -Syyu $yay_options"
 
 	# Packages from the AUR can now be installed like this:
-	su $user_name -c "yay -S $yay_options cava pamac-aur font-manager kvantum-theme-arc colorpicker betterlockscreen networkmanager-dmenu-git perl-linux-desktopfiles polybar rofi-git"
+	su $user_name -c "yay -S $yay_options spotify polybar-spotify-module cava pamac-aur font-manager kvantum-theme-arc colorpicker betterlockscreen networkmanager-dmenu-git perl-linux-desktopfiles polybar rofi-git"
     # su $user_name -c "yay -S $yay_options spotify polybar-spotify-module cava"
     
 	# Unpatch makepkg if you want
@@ -158,12 +158,8 @@ function install_packages() {
 
 	elif [[ $vm_setting == 1 ]]; then
   	echo "${green}Installation des paquets pour la machine réelle${reset}"
-  	pacman -S nvidia  virtualbox virtualbox-host-modules-arch $pacman_options
+  	pacman -S xf86-video-amdgpu  vulkan-radeon mesa-libgl mesa-vdpau libvdpau-va-gl virtualbox virtualbox-host-modules-arch $pacman_options
 	fi
-
-	chsh --shell /bin/zsh $user_name
-    chsh --shell /bin/zsh root	
-
 	systemctl enable NetworkManager
 	systemctl enable lightdm
 	systemctl enable ntpd
@@ -192,17 +188,11 @@ function customization() {
 	echo "Customization"
 	echo "***********************************${reset}"
 	echo
-	echo
 	git clone https://github.com/Antidote1911/myconfig.git
-
 	rsync -av myconfig/homeuser/ /home/$user_name/ --inplace
 	rsync -av myconfig/root/ /root --inplace
 	rsync -av myconfig/usr/ /usr --inplace
 	rsync -av myconfig/etc/ /etc --inplace
-
-	if [[ $vm_setting == 1 ]]; then
-  	cp -r /myconfig/20-nvidia.conf /etc/X11/xorg.conf.d/20-nvidia.conf
-	fi
 }
 
 function clean_up() {
