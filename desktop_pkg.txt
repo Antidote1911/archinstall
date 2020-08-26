@@ -111,3 +111,5 @@ ueberzug
 cmus
 picom
 wmctrl
+obconf
+openbox
