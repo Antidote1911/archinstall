@@ -144,7 +144,7 @@ function install_packages() {
   su $user_name -c "yay -Syyu $yay_options"
 
 	# Packages from the AUR can now be installed like this:
-	su $user_name -c "yay -S $yay_options spotify polybar-spotify-module cava pamac-aur font-manager kvantum-theme-arc colorpicker betterlockscreen networkmanager-dmenu-git perl-linux-desktopfiles polybar rofi-git"
+	su $user_name -c "yay -S $yay_options spotify polybar-spotify-module cava obmenu-generator pamac-aur font-manager kvantum-theme-arc colorpicker betterlockscreen networkmanager-dmenu-git perl-linux-desktopfiles polybar rofi-git"
     # su $user_name -c "yay -S $yay_options spotify polybar-spotify-module cava"
     
 	# Unpatch makepkg if you want
