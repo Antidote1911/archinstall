@@ -9,7 +9,6 @@ user_pw=""
 root_pw=""
 host_name=""
 vm_setting=""
-oh_my_zsh=""
 pacman_options="--noconfirm --needed"
 yay_options="--quiet --noconfirm --nopgpfetch --mflags --skipinteg"
 red=`tput setaf 1`
@@ -54,11 +53,8 @@ function set_hostname() {
 	echo "${red}***********************************"
 	echo "Hostname Configuration"
 	echo "***********************************${reset}"
-	echo
-	echo -n "Enter desired hostname: "
-	read host_name
-	echo $host_name > /etc/hostname
-	echo "127.0.0.1 $host_name.localdomain $host_name" >> /etc/hosts
+	echo archlinux > /etc/hostname
+	echo '127.0.0.1 archlinux.localdomain archlinux' >> /etc/hosts
 	echo
 	echo
 }
@@ -123,15 +119,6 @@ function set_timezone() {
 	echo
 	echo
 }
-
-function oh_my_zsh() {
-	echo "${red}***********************************"
-	echo "Install Oh-my-zsh ?"
-	echo "***********************************${reset}"
-	echo
-	read -p "0 - oui, 1 - non: " oh_my_zsh
-}
-
 
 function install_packages() {
 	echo "${red}***********************************"
@@ -216,19 +203,6 @@ function customization() {
 	if [[ $vm_setting == 1 ]]; then
   	cp -r /myconfig/20-nvidia.conf /etc/X11/xorg.conf.d/20-nvidia.conf
 	fi
-	
-	if [[ $oh_my_zsh == 0 ]]; then
-		echo "Setting Up Oh-My-Zsh"
-		git clone https://github.com/robbyrussell/oh-my-zsh.git --depth 1 /home/$user_name/.oh-my-zsh
-		cp /myconfig/archcraft.zsh-theme /home/$user_name/.oh-my-zsh/custom/themes/archcraft.zsh-theme
-		# https://stackoverflow.com/questions/43402753/oh-my-zsh-not-applying-themes
-		# su $user_name -c 'yay -Rncs --noconfirm grml-zsh-config'
-		cp /home/$user_name/.oh-my-zsh/templates/zshrc.zsh-template /home/$user_name/.zshrc
-		sed -i -e 's/ZSH_THEME=.*/ZSH_THEME="archcraft"/g' /home/$user_name/.zshrc
-		# for root
-		cp -r /home/$user_name/.oh-my-zsh /root/.oh-my-zsh
-		cp /home/$user_name/.oh-my-zsh/templates/zshrc.zsh-template /root/.zshrc		
-	fi
 }
 
 function clean_up() {
@@ -247,7 +221,6 @@ set_root_pw
 create_user
 set_hostname
 set_timezone
-oh_my_zsh
 install_packages
 install_grub
 customization
