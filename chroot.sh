@@ -128,33 +128,11 @@ function install_packages() {
         # Install packages
 	pacman -Syu - < desktop_pkg.txt $pacman_options
 
-	# Patch makepkg so we can run as it as root.
-	# sed -i 's/EUID == 0/EUID == -1/' /usr/bin/makepkg
-
-	# Install yay
-	echo "Install Yay"
-	su $user_name -c 'cd; git clone https://aur.archlinux.org/yay-bin.git'
-	su $user_name -c 'cd; cd yay-bin; makepkg'
-	pushd /home/$user_name/yay-bin/
-	pacman -U *.pkg.tar.zst $pacman_options
-	popd
-	rm -rf /home/$user_name/yay-bin
-
-	# do a yay system update
-  su $user_name -c "yay -Syyu $yay_options"
-
-	# Packages from the AUR can now be installed like this:
-	su $user_name -c "yay -S $yay_options spotify polybar-spotify-module cava obmenu-generator pamac-aur font-manager kvantum-theme-arc colorpicker betterlockscreen networkmanager-dmenu-git perl-linux-desktopfiles polybar rofi-git"
-    # su $user_name -c "yay -S $yay_options spotify polybar-spotify-module cava"
-    
-	# Unpatch makepkg if you want
-	# sed -i 's/EUID == -1/EUID == 0/' /usr/bin/makepkg
-
 	# video drivers
 	if [[ $vm_setting == 0 ]]; then
   	echo "${green}Installation des paquets pour la machine virtuelle${reset}"
-  	pacman -S virtualbox-guest-utils $pacman_options
-  	systemctl enable vboxservice
+  	pacman -S virtualbox-guest-utils virtualbox-guest-dkms open-vm-tools $pacman_options
+  	systemctl enable vboxservice vmtoolsd.service vmware-vmblock-fuse.service
 
 	elif [[ $vm_setting == 1 ]]; then
   	echo "${green}Installation des paquets pour la machine réelle${reset}"
@@ -163,7 +141,6 @@ function install_packages() {
 	systemctl enable NetworkManager
 	systemctl enable lightdm
 	systemctl enable ntpd
-    # systemctl --user enable spotify-listener
 
 	echo "Disable systemd-networkd.service. We have NetworkManager."
 	[[ -e /etc/systemd/system/multi-user.target.wants/systemd-networkd.service ]] && rm /etc/systemd/system/multi-user.target.wants/systemd-networkd.service
@@ -181,18 +158,6 @@ function install_grub() {
 	grub-install --target=i386-pc --no-floppy --recheck /dev/sda
 	grub-mkconfig -o /boot/grub/grub.cfg
 	echo
-}
-
-function customization() {
-	echo "${red}***********************************"
-	echo "Customization"
-	echo "***********************************${reset}"
-	echo
-	git clone https://github.com/Antidote1911/myconfig.git
-	rsync -av myconfig/homeuser/ /home/$user_name/ --inplace
-	rsync -av myconfig/root/ /root --inplace
-	rsync -av myconfig/usr/ /usr --inplace
-	rsync -av myconfig/etc/ /etc --inplace
 }
 
 function clean_up() {
@@ -213,5 +178,4 @@ set_hostname
 set_timezone
 install_packages
 install_grub
-customization
 clean_up
