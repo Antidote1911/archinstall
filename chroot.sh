@@ -68,7 +68,7 @@ function create_user() {
 	echo -n "Enter desired username: "
 	read user_name
 	echo
-	useradd -m -G adm,audio,floppy,log,network,rfkill,scanner,storage,optical,power,wheel -s /bin/bash $user_name
+	useradd -m -G adm,audio,floppy,log,network,rfkill,scanner,storage,optical,power,wheel -s /bin/zsh $user_name
 	echo $'\n'
 
 	pass_ok=0
@@ -125,7 +125,16 @@ function install_packages() {
 	echo "Package Installation"
 	echo "***********************************${reset}"
 	echo
-        # Install packages
+	
+	## Append packarch repository to pacman.conf
+	cat >> "/etc/pacman.conf" <<- EOL
+
+	## Packarch Repository
+	[packarch]
+	SigLevel = Optional TrustAll
+	Server = https://Antidote1911.github.io/packarch-pkgs/\$arch
+	EOL
+    # Install packages
 	pacman -Syu - < desktop_pkg.txt $pacman_options
 
 	# video drivers

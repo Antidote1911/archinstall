@@ -13,13 +13,11 @@ arc-gtk-theme
 arc-icon-theme
 arj
 atril
-base-devel
 betterlockscreen
 bibata-cursor-theme
 bind
 binutils
 blueman
-bmon
 bmon
 bspwm
 calc

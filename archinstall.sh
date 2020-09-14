@@ -2,7 +2,7 @@
 #
 
 set -e
-
+export TERM=xterm-256color
 disk_list=""
 disk_install=""
 swap_size=0
@@ -90,7 +90,7 @@ function install_base() {
 	echo -e "| 5. Install Base System | "
 	echo -e "--------------------------"
 	echo
-	pacstrap /mnt base base-devel linux linux-firmware amd-ucode nano
+	pacstrap /mnt base base-devel linux linux-firmware amd-ucode nano zsh
 }
 
 function pre_chroot() {
