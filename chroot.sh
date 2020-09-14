@@ -169,6 +169,28 @@ function install_grub() {
 	echo
 }
 
+function customization() {
+	echo "${red}***********************************"
+	echo "Customization"
+	echo "***********************************${reset}"
+	echo
+	
+	## French keybord
+	cat >> "/etc/X11/xorg.conf.d/00-keyboard.conf" <<- EOL
+	Section "InputClass"
+	Identifier "system-keyboard"
+	MatchIsKeyboard "on"
+	Option "XkbLayout" "fr"
+	EndSection
+	EOL
+	
+	# Lightdm display-manager
+	sed -i 's/^#\(background=\)$/\1/usr/share/backgrounds/lightdm.jpg/
+			s/^#\(theme-name=\)$/\1Fantome/
+			s/^#\(icon-theme-name=\)$/\1Numix/' /etc/lightdm/lightdm-gtk-greeter.conf
+
+}
+
 function clean_up() {
 	# Remove install scripts from root
 	# (Exits chroot.sh - back into install.sh - and reboots from that script)
@@ -187,4 +209,5 @@ set_timezone
 install_packages
 create_user
 install_grub
+customization
 clean_up

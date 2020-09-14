@@ -41,6 +41,7 @@ git
 git
 gnome-themes-extra
 gparted
+grml-zsh-config
 grub
 gst-libav
 gst-plugins-bad
