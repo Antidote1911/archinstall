@@ -182,9 +182,9 @@ function clean_up() {
 
 real_or_vm
 set_root_pw
-create_user
 set_hostname
 set_timezone
 install_packages
+create_user
 install_grub
 clean_up
