@@ -185,9 +185,9 @@ function customization() {
 	EOL
 	
 	# Lightdm display-manager
-	sed -i 's/^#\(background=\)$/\1/usr/share/backgrounds/lightdm.jpg/
-			s/^#\(theme-name=\)$/\1Fantome/
-			s/^#\(icon-theme-name=\)$/\1Numix/' /etc/lightdm/lightdm-gtk-greeter.conf
+    sed -i 's/^#\(background=\)$/\1#232627/
+            s/^#\(theme-name=\)$/\1Fantome/
+            s/^#\(icon-theme-name=\)$/\1Numix/' /etc/lightdm/lightdm-gtk-greeter.conf
 
 }
 
