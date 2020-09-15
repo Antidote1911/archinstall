@@ -185,10 +185,11 @@ function customization() {
 	EOL
 	
 	# Lightdm display-manager
-    sed -i 's/^#\(background=\)$/\1/usr/share/backgrounds/lightdm.jpg/
-            s/^#\(theme-name=\)$/\1Fantome/
-            s/^#\(icon-theme-name=\)$/\1Numix/' /etc/lightdm/lightdm-gtk-greeter.conf
-
+    sed -i -e 's/#background=.*/background="\/usr\/share\/backgrounds\/lightdm.jpg"/' /etc/lightdm/lightdm-gtk-greeter.conf
+    sed -i -e 's/#theme-name=.*/theme-name="Fantome"/' /etc/lightdm/lightdm-gtk-greeter.conf
+    sed -i -e 's/#default-user-image=.*/default-user-image="\/usr\/share\/pixmaps\/user.png"/' /etc/lightdm/lightdm-gtk-greeter.conf
+    sed -i -e 's/#cursor-theme-name=.*/cursor-theme-name="Bibata_Ice"/' /etc/lightdm/lightdm-gtk-greeter.conf
+    sed -i -e 's/#icon-theme-name=.*/icon-theme-name="Numix"/' /etc/lightdm/lightdm-gtk-greeter.conf
 }
 
 function clean_up() {
