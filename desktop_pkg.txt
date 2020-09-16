@@ -11,6 +11,8 @@ alsa-tools
 alsa-utils
 arc-gtk-theme
 arc-icon-theme
+arch-install-scripts
+archiso
 arj
 atril
 betterlockscreen
@@ -37,7 +39,7 @@ ffmpegthumbnailer
 firefox
 firefox-i18n-fr
 font-manager
-gcolor2
+gcolor3
 geany
 git
 git
@@ -150,6 +152,7 @@ scrot
 smplayer
 smplayer-skins
 smplayer-themes
+squashfs-tools
 strace
 sxhkd
 system-config-printer
