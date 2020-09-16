@@ -190,7 +190,7 @@ function customization() {
 	
     sed -i -e 's/#background=.*/background=\/usr\/share\/backgrounds\/lightdm.jpg/' /etc/lightdm/lightdm-gtk-greeter.conf
     sed -i -e 's/#theme-name=.*/theme-name=Fantome/' /etc/lightdm/lightdm-gtk-greeter.conf
-    sed -i -e 's/#icon-theme-name=.*/icon-theme-name=Numix/' /etc/lightdm/lightdm-gtk-greeter.conf
+    sed -i -e 's/#icon-theme-name=.*/icon-theme-name=Sardi-Flat-Colora-Deep-Sky/' /etc/lightdm/lightdm-gtk-greeter.conf
     sed -i -e 's/#font-name=.*/font-name=font-name=Noto Sans 11/' /etc/lightdm/lightdm-gtk-greeter.conf
     
     cat >> "/etc/lightdm/lightdm-gtk-greeter.conf" <<- EOL

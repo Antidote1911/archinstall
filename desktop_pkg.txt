@@ -31,6 +31,7 @@ dmidecode
 dunst
 fatresize
 feh
+fetchmirrors
 ffmpeg
 ffmpegthumbnailer
 firefox
@@ -109,7 +110,6 @@ noto-fonts
 nss-mdns
 ntfs-3g
 ntp
-numix-icon-theme-git
 numlockx
 obconf
 obmenu-generator
@@ -142,6 +142,10 @@ reflector
 rofi
 rsync
 samba
+sardi-icons
+sardi-mint-y-icons-git
+sardi-flat-colora-variations-icons-git
+sardi-mono-numix-colora-variations-icons-git
 scrot
 smplayer
 smplayer-skins
@@ -188,6 +192,7 @@ xf86-video-nouveau
 xf86-video-vesa
 xf86-video-vesa
 xf86-video-vmware
+xfce4-settings
 xmlstarlet
 xorg-drivers
 xorg-fonts-misc
