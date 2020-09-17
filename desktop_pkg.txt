@@ -113,9 +113,6 @@ nss-mdns
 ntfs-3g
 ntp
 numlockx
-obconf
-obmenu-generator
-openbox
 openssh
 os-prober
 p7zip
@@ -145,9 +142,9 @@ rofi
 rsync
 samba
 sardi-icons
-sardi-mint-y-icons-git
+sardi-flat-mint-y-icons-git
 sardi-flat-colora-variations-icons-git
-sardi-mono-numix-colora-variations-icons-git
+sardi-flat-mixing-icons-git
 scrot
 smplayer
 smplayer-skins
