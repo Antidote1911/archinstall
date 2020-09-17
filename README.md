@@ -1,8 +1,8 @@
-# Personal Archlinux Install Script  
+# Personal Archlinux Install Script  for my live iso Packarch
 
 **Installation:**  
 
-Boot Arch Install media, connect to the internet, and create the required GPT partitions:
+Boot Packarch, create the required GPT partitions:
 - sda1 8Mb unformated with bios-boot flag
 - sda2 for root
 - sdb3 for home
