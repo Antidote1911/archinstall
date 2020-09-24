@@ -77,10 +77,10 @@ function preparedisk() {
 	# echo
 
 	# for vbox tests...
-	mkfs.ext4 /dev/sda1 -L root
-	mkfs.ext4 /dev/sda2 -L home
-	mount /dev/sda1 /mnt
-	mkdir /mnt/home && mount /dev/sda2 /mnt/home
+	mkfs.ext4 /dev/sda2 -L root
+	mkfs.ext4 /dev/sda3 -L home
+	mount /dev/sda2 /mnt
+	mkdir /mnt/home && mount /dev/sda3 /mnt/home
 	echo
 	echo
 }
