@@ -5,7 +5,7 @@
 Boot Packarch, create the required GPT partitions:
 - sda1 8Mb unformated with bios-boot flag
 - sda2 for root
-- sdb3 for home
+- sda3 for home
 
 ```bash
 pacman -Sy git  
