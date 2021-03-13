@@ -20,6 +20,7 @@ bibata-cursor-theme
 bind
 binutils
 blueman
+bc
 bmon
 bspwm
 calc
@@ -66,6 +67,7 @@ hplip
 htop
 hunspell-fr
 hwinfo
+i3lock-color
 imagemagick
 inetutils
 intel-media-driver
@@ -127,6 +129,8 @@ pulseaudio-alsa
 pulseaudio-alsa
 pulseaudio-bluetooth
 pulseaudio-zeroconf
+python-pyparted
+python-clickgen
 pv
 pwgen
 python
