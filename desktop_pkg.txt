@@ -27,6 +27,7 @@ calc
 cava
 cmatrix
 colorpicker
+compton-tryone-git
 cpio
 cpupower
 cups
@@ -120,7 +121,6 @@ pacman-contrib
 pavucontrol
 pcmanfm
 perl-linux-desktopfiles
-picom-ibhagwan-git
 plank
 polkit-gnome
 polybar
