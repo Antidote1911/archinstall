@@ -150,7 +150,7 @@ squashfs-tools
 strace
 sxhkd
 system-config-printer
-terminus-font-otb
+terminus-font
 termite
 tree
 ttf-dejavu
