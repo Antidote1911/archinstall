@@ -217,6 +217,5 @@ xtitle-git
 yad
 yay
 zip
-zsh
 zsh-autosuggestions
 zsh-syntax-highlighting
